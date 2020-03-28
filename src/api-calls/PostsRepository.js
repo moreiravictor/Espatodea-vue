@@ -3,7 +3,7 @@ import Repository from './Repository'
 const resource = "/post";
 
 export default {
-    get() {
+    getAll() {
         return Repository.get(`${resource}/getAll`);
     },
     getByTitle(post_title) {
@@ -11,5 +11,11 @@ export default {
     },
     publishPosts(post) {
         return Repository.post(`${resource}/publish`, post)
+    },
+    patchPost(post, id) {
+        return Repository.patch(`${resource}/patch/${id}`, post)
+    },
+    deletePost(id) {
+        return Repository.delete(`${resource}/delete/${id}`)
     }
 };

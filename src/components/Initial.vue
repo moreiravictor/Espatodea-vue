@@ -45,7 +45,7 @@ export default {
     },
 
     async getPosts() {
-      const {data} = await postCaller.get()
+      const {data} = await postCaller.getAll()
       this.info_api = data.data
     },
 
