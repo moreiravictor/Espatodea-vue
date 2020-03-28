@@ -1,14 +1,16 @@
 <template>
-    <Initial/>
+    <PostForm/>
 </template>
 
 <script>
-import Initial from './components/Initial.vue'
+// import Initial from './components/Initial.vue'
+import PostForm from './components/forms/PostForm.vue'
 
 export default {
   name: 'App',
   components: {
-    Initial
+    // Initial,
+    PostForm
   }
 }
 </script>

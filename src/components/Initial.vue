@@ -37,7 +37,7 @@ export default {
       info_post: []
     }
   },
-
+    
   methods: {
     async publishPosts(model) {
       const {data} = await postCaller.publishPosts(model);
