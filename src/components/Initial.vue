@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       data_like: {
-        foo: 'CU'
+        foo: 'aff'
       },
       is_clicked: 0,
       message: 'asdsaasd',
@@ -52,10 +52,10 @@ export default {
     isClicked() {
       if (this.is_clicked%2 == 0) {
         this.is_clicked++
-        return 'CU'
+        return 'aff'
       } else {
         this.is_clicked++
-        return 'BUCETA'
+        return 'oof'
       } 
     }
 
