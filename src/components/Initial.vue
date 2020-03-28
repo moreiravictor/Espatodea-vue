@@ -7,16 +7,20 @@
     <button v-on:click="data_like.foo = isClicked() ">Change this shit</button>
 
     <div>
+      <button v-on:click="getPosts()">Call API</button>
+      <br>
       {{ info_api }}
-      <button v-on:click="call()">Call API</button>
     </div>
-
+    <br>
+    <input v-model="post_model.title" placeholder="Put the post title">
+    <button v-on:click="publishPosts(post_model)">Publich Post</button>
+    {{ info_post }}
   </div>
 </template>
 
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory'
-const PostsRepository = RepositoryFactory.get('posts')
+const postCaller = RepositoryFactory.get('posts')
 
 export default {
   data() {
@@ -26,14 +30,22 @@ export default {
       },
       is_clicked: 0,
       message: 'asdsaasd',
-      info_api: []
+      post_model: {
+        title: ''
+      },
+      info_api: [],
+      info_post: []
     }
   },
 
   methods: {
+    async publishPosts(model) {
+      const {data} = await postCaller.publishPosts(model);
+      this.info_post = data;
+    },
 
-    async call() {
-      const {data} = await PostsRepository.get()
+    async getPosts() {
+      const {data} = await postCaller.get()
       this.info_api = data.data
     },
 
