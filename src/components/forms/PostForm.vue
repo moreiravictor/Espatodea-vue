@@ -1,9 +1,9 @@
 <template>
   <div class="outter-post">
       <div class="inner-selection">
-        <div class="button-selection" v-on:click="showCategories()">Categories</div>
+        <div class="button-selection" @click="showCategories()">Categories</div>
         <div class="inner-selection" :style="{display: showCat}">
-            <div class="selection" v-for="(category, i) in categories" v-bind:key="category">
+            <div class="selection" v-for="(category, i) in categories" :key="category">
                 <input type="checkbox" :id="i" value="value" v-model="checked_categories[i]">
                 <label> {{category}} </label>
             </div>
@@ -14,20 +14,20 @@
               <div class="upper-fields">
                     <div class="combo-field">
                         <label class="label">Post title</label> 
-                        <input v-model="post_model.title" placeholder="Type the post title">
+                        <input v-model="post_model.title" placeholder="Type the post title" required>
                     </div>
                     <div class="combo-field">
                         <label class="label">Post author</label>
-                        <input v-model="post_model.post_author" placeholder="Type the post title"> 
+                        <input v-model="post_model.post_author" placeholder="who wrote it?" required> 
                     </div>
               </div>
               <div class="central-fields">
                   <div class="combo-field">
                     <label class="label">Post Content</label>
-                    <textarea class="content" v-model="post_model.post_content" placeholder="Type the post content"></textarea>
+                    <textarea class="content" v-model="post_model.post_content" placeholder="Type the post content" required></textarea>
                   </div>
               </div>
-            <button class="button" v-on:click="sendPost(post_model)">Postar</button>
+            <button class="button" @click="sendPost(post_model)">Postar</button>
           </div>
       </form>
   </div>
@@ -35,20 +35,13 @@
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
+import { Post } from './../../models/Post.js'
 const postCaller = RepositoryFactory.get('posts');
-let postFactory = (
-    {
-        title: "",
-        post_content: "",
-        post_author: "",
-        post_categories: [],
-        post_date: new Date()
-    }
-)
+
 export default {
     data() {
         return {
-            post_model: postFactory,
+            post_model: new Post(),
             categories: {
                 0:  "Environment",
                 1:	"Environment Tips",
@@ -87,8 +80,7 @@ export default {
                 this.showCat = "none";  
             }
         }
-    }
-
+    },
 
 }
 </script>
