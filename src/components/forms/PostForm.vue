@@ -35,13 +35,13 @@
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
-import { Post } from './../../models/Post.js'
+// import { Post } from './../../models/Post.js'
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
     data() {
         return {
-            post_model: new Post(),
+            post_model: [],
             categories: {
                 0:  "Environment",
                 1:	"Environment Tips",
