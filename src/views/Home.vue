@@ -87,7 +87,7 @@ export default {
     color: white;
     font-family: "Quicksand Light";
     font-size: 22px;
-    padding: 3%;
+    padding: 3% 3% 0% 3%;
     padding-right: 10%;
 }
 .banner-text-bigger {
