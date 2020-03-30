@@ -2,12 +2,12 @@
   <div id="header-out">
     <div class="header-elements">
       <div class="header-logo">
-        <router-link to="/home"><img src="./../assets/espatodea.png" style="width: 110px;height:110px;"></router-link>
+        <router-link to="/"><img src="./../assets/espatodea.png" style="width: 110px;height:110px;"></router-link>
       </div>
       <div class="header-menu">
         <ul>
           <router-link to="/post/form" class="no-decoration"><li>Meio Ambiente</li></router-link>
-          <router-link to="/home" class="no-decoration"><li>Entretenimento</li></router-link>
+          <router-link to="/" class="no-decoration"><li>Entretenimento</li></router-link>
           <router-link to="/post/form" class="no-decoration"><li>Alimentação</li></router-link>
           <router-link to="/post/form" class="no-decoration"><li>Entenda mais</li></router-link>
         </ul>
@@ -52,16 +52,25 @@ li {
   padding: 10px;
 }
 .header-logo {
+  animation-name: emerge;
+  animation-duration: 2s;
   margin-left: 10%;
 
   color: white;
 }
 .header-menu {
+  animation-name: emerge;
+  animation-duration: 6s;
   margin-right: 10%;
   font-family: "Quicksand Light";
 }
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+
+@keyframes emerge {
+    from {padding-left:80%}
+    to {}
 }
 </style>
