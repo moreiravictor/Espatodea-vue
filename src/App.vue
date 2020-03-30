@@ -10,8 +10,8 @@ import Header from './components/Header.vue'
 import router from './components/router.js'
 
 export default {
-  router: router,
   name: 'App',
+  router,
   components: {
     Header
   }

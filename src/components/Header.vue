@@ -2,7 +2,7 @@
   <div id="header-out">
     <div class="header-elements">
       <div class="header-logo">
-        <img src="./../assets/espatodea.png" style="width: 110px;height:110px;">
+        <router-link to="/home"><img src="./../assets/espatodea.png" style="width: 110px;height:110px;"></router-link>
       </div>
       <div class="header-menu">
         <ul>

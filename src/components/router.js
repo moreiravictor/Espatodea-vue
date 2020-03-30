@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import Initial from './Initial.vue'
+import Home from './../views/Home.vue'
 import PostForm from './forms/PostForm.vue'
 import Vue from 'vue';
 
@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/home',
-        component: Initial
+        component: Home
     },
     {
         path: '/post/form',
