@@ -54,6 +54,7 @@ export default {
 #homeGallery-outter {
   width: 100%;
   font-family: "Quicksand Light";
+  margin-bottom: 40px;
 }
 .gallery-inner {
   display: flex;
