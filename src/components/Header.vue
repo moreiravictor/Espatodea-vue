@@ -38,7 +38,7 @@ li {
 }
 #header-out {
   width: 100%;
-  height: 80px;
+  height: 115px;
   background-color: #F3B69B;
   display: flex;
   align-items: center;
@@ -59,18 +59,11 @@ li {
   color: white;
 }
 .header-menu {
-  animation-name: emerge;
-  animation-duration: 6s;
   margin-right: 10%;
   font-family: "Quicksand Light";
 }
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
-}
-
-@keyframes emerge {
-    from {padding-left:80%}
-    to {}
 }
 </style>
