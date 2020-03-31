@@ -2,7 +2,7 @@
   <div id="header-out">
     <div class="header-elements">
       <div class="header-logo">
-        <router-link to="/"><img src="./../assets/espatodea.png" style="width: 110px;height:110px;"></router-link>
+        <router-link to="/"><img src="./../assets/espatodea.png" class="logo"></router-link>
       </div>
       <div class="header-menu">
         <ul>
@@ -11,31 +11,31 @@
           <router-link to="/post/see" class="no-decoration"><li>Alimentação</li></router-link>
           <router-link to="/post/form" class="no-decoration"><li>Entenda mais</li></router-link>
         </ul>
+      <div class="header-social">
+          <a href="https://www.facebook.com/ecoespatodea" target="_blank" title="nosso facebook">
+            <font-awesome-icon class="header-icon" :icon="['fab', 'facebook']" />
+          </a>
+          <a href="https://www.instagram.com/ecoespatodea/" target="_blank" title="nosso instagram">
+            <font-awesome-icon class="header-icon" :icon="['fab', 'instagram']" />
+          </a>
+          <a href="https://github.com/moreiravictor" target="_blank" title="nosso desenvolvedor">
+            <font-awesome-icon class="header-icon" :icon="['fab', 'github']" />
+          </a>
+      </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import router from './router.js'
+import router from './router.js';
+
 export default {
   router: router
 }
 </script>
 
 <style>
-ul {
-  list-style-type: none;
-  display: flex;
-}
-li {
-  margin-right: 10px;
-  padding: 5px;
-}
-.no-decoration {
-  text-decoration: none;
-  color: white;
-}
 #header-out {
   width: 100%;
   height: 115px;
@@ -58,9 +58,35 @@ li {
 
   color: white;
 }
+.logo {
+  width: 150px;
+  height: 150px;
+}
 .header-menu {
-  margin-right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5%;
   font-family: "Quicksand Light";
+  font-size: 20px;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  padding-right: 20px;
+}
+li {
+  margin-right: 10px;
+  padding: 5px;
+}
+.no-decoration {
+  text-decoration: none;
+  color: white;
+}
+.header-icon {
+  padding-right: 20px;
+  color: white;
+  cursor: pointer;
 }
 @font-face {
   font-family: "Quicksand Light";
