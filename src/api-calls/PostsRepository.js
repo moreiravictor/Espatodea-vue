@@ -17,5 +17,8 @@ export default {
     },
     deletePost(id) {
         return Repository.delete(`${resource}/delete/${id}`)
+    },
+    getById(id) {
+        return Repository.get(`${resource}/getById/${id}`)
     }
 };

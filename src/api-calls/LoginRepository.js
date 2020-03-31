@@ -1,9 +1,9 @@
 import Repository from './Repository'
 
-const resource = "/post";
+const resource = "/admin";
 
 export default {
     connectAsAdmin(user) {
-        return Repository.get(`${resource}/admin`, user);
+        return Repository.get(`${resource}/get`, user);
     }
 };

@@ -8,7 +8,7 @@
         <ul>
           <router-link to="/post/form" class="no-decoration"><li>Meio Ambiente</li></router-link>
           <router-link to="/" class="no-decoration"><li>Entretenimento</li></router-link>
-          <router-link to="/post/form" class="no-decoration"><li>Alimentação</li></router-link>
+          <router-link to="/post/see" class="no-decoration"><li>Alimentação</li></router-link>
           <router-link to="/post/form" class="no-decoration"><li>Entenda mais</li></router-link>
         </ul>
       </div>
