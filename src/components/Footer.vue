@@ -80,7 +80,7 @@ export default {
     width:28%;
 }
 .news-field {
-    padding-right: 8%;
+    margin-right: 10%;
     height: 45%;
     display: flex;
     flex-direction: column;
