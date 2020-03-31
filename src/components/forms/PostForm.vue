@@ -13,17 +13,17 @@
           <div class="outter-field">
               <div class="upper-fields">
                     <div class="combo-field">
-                        <label class="label">Post title</label> 
+                        <label class="label-post">Post title</label> 
                         <input v-model="post_model.title" placeholder="Type the post title" required>
                     </div>
                     <div class="combo-field">
-                        <label class="label">Post author</label>
+                        <label class="label-post">Post author</label>
                         <input v-model="post_model.post_author" placeholder="who wrote it?" required> 
                     </div>
               </div>
               <div class="central-fields">
                   <div class="combo-field">
-                    <label class="label">Post Content</label>
+                    <label class="label-post">Post Content</label>
                     <textarea class="content" v-model="post_model.post_content" placeholder="Type the post content" required></textarea>
                   </div>
               </div>
@@ -35,13 +35,13 @@
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
-// import { Post } from './../../models/Post.js'
+import { Post } from './../../models/Post.js'
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
     data() {
         return {
-            post_model: [],
+            post_model: new Post(),
             categories: {
                 0:  "Environment",
                 1:	"Environment Tips",
@@ -101,7 +101,8 @@ export default {
 .central-fields {
     padding-top:10px;
 }
-.label {
+.label-post {
+    top: 20%;
     padding-bottom: 5px;
 }
 .button {
@@ -127,6 +128,7 @@ export default {
 }
 .outter-post {
     margin: 0 auto;
+    padding: 40px;
     border: 1px solid black;
     border-radius: 4px;
     width: 80%;
