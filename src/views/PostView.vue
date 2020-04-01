@@ -19,30 +19,31 @@
                 <div class="comments-title">Comentários</div>
                 <div v-for="(comment, index) in post.data.data.comments" :key="index" class="comment-item">
                     <div class="comment-author">
-                        autor: {{comment.comment_author}}
+                        <div class="author-label">autor: .</div> {{comment.comment_author}}
                     </div>
-                    <div class="comment-content">
-                        comentário: {{comment.comment_content}}
+                    <div class="comment-content" v-html="comment.comment_content">
                     </div>
                     <div class="comment-date">
-                        data: {{prepareDate(comment.comment_date)}}
+                        {{prepareDate(comment.comment_date)}}
                     </div>
                 </div>
             </div>
-            <div class="new-comment">
-                <div class="new-comment-title">
-                    Digite um novo comentário!
-                </div>
-                <div class="new-comment-item">
-                    <label class="comment-label">autor:</label>
-                    <input v-model="new_comment.comment_author"/>
-                </div>
-                <div class="new-comment-item">
-                    <label class="comment-label">comentário:</label>
-                    <textarea v-model="new_comment.comment_content" class="comment-area"/>
-                </div>
-                <div class="new-comment-item">
-                    <button @click="publishComment(new_comment)" class="button-comment">comentar</button>
+                <div class="new-comment-outter">
+                <div class="new-comment">
+                    <div class="new-comment-title">
+                        Digite um novo comentário!
+                    </div>
+                    <div class="new-comment-item">
+                        <label class="comment-label">autor:</label>
+                        <input v-model="new_comment.comment_author"/>
+                    </div>
+                    <div class="new-comment-item">
+                        <label class="comment-label">comentário:</label>
+                        <textarea v-model="new_comment.comment_content" class="comment-area"/>
+                    </div>
+                    <div class="new-comment-item">
+                        <button @click="publishComment(new_comment)" class="button-comment">comentar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,7 +52,6 @@
 
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory';
-// import VueRouter from 'vue-router';
 const postCaller = RepositoryFactory.get('posts');
 const commentCaller = RepositoryFactory.get('comments');
 
@@ -65,8 +65,12 @@ export default {
     },
     methods: {
         async getPostById(id) {
-            this.post = await postCaller.getById(id);
-            this.post.data.data.post_content = this.post.data.data.post_content.replace(/\n/g, "<br />");
+            postCaller.getById(id).then(response =>{
+                this.post = response;
+                this.post.data.data.post_content = this.post.data.data.post_content.replace(/\n/g, "<br/>");
+                this.post.data.data.comments.forEach((comment, index) => 
+                    this.post.data.data.comments[index].comment_content = this.post.data.data.comments[index].comment_content.replace(/\n/g, "<br/>"));
+            });
         },
         publishComment(model) {
             model.comment_date = new Date();
@@ -75,7 +79,7 @@ export default {
             this.$router.go(0)
         },
         verify(attribute) {
-            return (this.post.data != undefined) ? this.post.data.data[attribute] : '';
+            return (this.post != []) ? this.post.data.data[attribute] : '';
         },
         prepareDate(date) {
             let date_converted = new Date(date);
@@ -138,6 +142,7 @@ export default {
     width:100%; 
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .comments-title {
     margin-bottom: 2%;
@@ -146,15 +151,33 @@ export default {
 }
 .comment-item {
     display: flex;
-    width: 100%;
+    width: 60%;
     flex-direction: column;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    /* border-top: 1px solid black; */
     padding: 1% 0.5% 1% 0.5%;
-    border-radius: 4px;
     margin-bottom: 10px;
 }
-.new-comment {
+.author-label {
+    font-weight: bold;
+    color: #DBA490;
+}
+.comment-author {
+    display: flex;
+    margin-bottom: 1%;
+}
+.comment-content {
+    margin-bottom: 1%;
+    font-size: 16px;
+} 
+.new-comment-outter {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.new-comment {
+    width: 60%;
     display: flex;
     flex-direction: column;
 }
@@ -165,7 +188,7 @@ export default {
     font-size: 20px;
 }
 .new-comment-item {
-    width: 25%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -173,12 +196,12 @@ export default {
     margin-bottom: 2%;
 }
 .comment-area {
-    width: 200%;
+    width: 100%;
     height: 300px;
 }
 .button-comment {
     margin-top: 4%;
-    width: 40%;
+    width: 20%;
     height: 30px;
     border: 0.1px solid #000;
     color: #000;
