@@ -1,7 +1,7 @@
 <template>
   <div class="outter-post">
       <div class="inner-selection">
-        <div class="button-selection" @click="showCategories()">Categories</div>
+        <div class="button-selection" @click="showCategories()">Categorias</div>
         <div class="inner-selection" :style="{display: showCat}">
             <div class="selection" v-for="(category, i) in categories" :key="category">
                 <input type="checkbox" :id="i" value="value" v-model="checked_categories[i]">
@@ -13,31 +13,43 @@
           <div class="outter-field">
               <div class="upper-fields">
                     <div class="combo-field">
-                        <label class="label-post">Post title</label> 
-                        <input v-model="post_model.title" placeholder="Type the post title" required>
+                        <label class="label-post">Título do post</label> 
+                        <input v-model="post_model.title" placeholder="digite o título do post" required>
                     </div>
                     <div class="combo-field">
-                        <label class="label-post">Post author</label>
-                        <input v-model="post_model.post_author" placeholder="who wrote it?" required> 
+                        <label class="label-post">Autor do post</label>
+                        <input v-model="post_model.post_author" placeholder="quem escreveu?" required> 
+                    </div>
+                    <div class="combo-field">
+                        <label class="label-post">Imagem do post</label>
+                        <label>acces token</label>
+                        <input style="margin-top:5px" type="text" v-model="acces_token">
+                        <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
+                        <button style="margin-top:10px" @click="sendImageToImgur()">enviar imagem</button>
                     </div>
               </div>
               <div class="central-fields">
                   <div class="combo-field">
-                    <label class="label-post">Post Content</label>
-                    <textarea class="content" v-model="post_model.post_content" placeholder="Type the post content" required></textarea>
+                    <label class="label-post">Conteúdo do post</label>
+                    <textarea class="content" v-model="post_model.post_content" placeholder="digite o post" required></textarea>
                   </div>
               </div>
             <button class="button" @click="sendPost(post_model)">Postar</button>
           </div>
       </form>
+      <div class="imgur-authorizatiom">
+          <label>client_id</label>
+          <input type="text" v-model="client_id">
+      <a style="text-decoration: none; border: 1px solid black; margin-top: 10px" :href="authLink()" target="_blank">Clique aqui para autorizar o Imgur</a>
+      </div>
   </div>
 </template>
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
 import { Post } from './../../models/Post.js'
+import axios from 'axios'
 const postCaller = RepositoryFactory.get('posts');
-
 export default {
     data() {
         return {
@@ -54,7 +66,10 @@ export default {
                 8:	"Food Recipes"
             },
             checked_categories: [],
-            showCat: "none"
+            showCat: "none",
+            selectedImage: null,
+            acces_token: '',
+            client_id: ''
         }
     },
 
@@ -79,8 +94,23 @@ export default {
             else  {
                 this.showCat = "none";  
             }
+        },
+        onImageSelected(event) {
+            this.selectedImage = event.target.files[0];
+            console.log(this.selectedImage);
+        },
+        sendImageToImgur() {
+            if (this.selectedImage != null) {
+                axios.post('https://api.imgur.com/3/image', 
+                    this.selectedImage, {
+                    headers: {Authorization: `Bearer ${this.acces_token}`}})
+                    .then(res => this.post_model.post_image_path = res.data.data.link);
+            }
+        },
+        authLink() {
+            return `https://api.imgur.com/oauth2/authorize?client_id=${this.client_id}&response_type=token`;
         }
-    },
+    }
 
 }
 </script>
@@ -133,6 +163,7 @@ export default {
     border-radius: 4px;
     width: 80%;
     display: flex;
+    font-family: "Quicksand Light";
 }
 .outter-field {
     padding-left: 12%;
@@ -169,5 +200,13 @@ textarea, input {
     margin-left: 10px;
     margin-top: 10px;
 }
+.imgur-authorizatiom {
+    display: flex;
+    flex-direction: column;
+}
 
+@font-face {
+  font-family: "Quicksand Light";
+  src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+}
 </style>

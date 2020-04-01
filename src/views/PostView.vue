@@ -7,6 +7,9 @@
             <div class="post-title">
                 {{verify('title')}}
             </div>
+            <div class="post-image">
+                <img class="post-image-data" :src="verify('post_image_path')"/>
+            </div>
         </div>
         <div class="middle-post">
             <div v-html="verify('post_content')"></div>
@@ -74,7 +77,7 @@ export default {
         },
         publishComment(model) {
             model.comment_date = new Date();
-            model.post_id = 30;
+            model.post_id = 32;
             commentCaller.publishComment(model);
             this.$router.go(0)
         },
@@ -87,7 +90,7 @@ export default {
         }
     },
     mounted() {
-        this.getPostById(30);
+        this.getPostById(32);
     }
 }
 </script>
@@ -114,6 +117,12 @@ export default {
     margin-bottom: 30px;
     font-size: 34px;
     font-weight: bold;
+}
+.post-image {
+    width: 100%;
+}
+.post-image-data {
+    width: 100%;
 }
 .middle-post {
     display: flex;
