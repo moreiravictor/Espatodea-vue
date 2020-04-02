@@ -2,25 +2,25 @@
     <div class="outter-post-view">
         <div class="upper-post">
             <div class="post-date">
-                {{prepareDate(verify('post_date'))}}
+                {{prepareDate(post_data.post_date)}}
             </div>
             <div class="post-title">
-                {{verify('title')}}
+                {{post_data.title}}
             </div>
             <div class="post-image">
-                <img class="post-image-data" :src="verify('post_image_path')"/>
+                <img class="post-image-data" :src="post_data.post_image_path"/>
             </div>
         </div>
         <div class="middle-post">
-            <div v-html="verify('post_content')"></div>
+            <div v-html="post_data.post_content"></div>
         </div>
         <div class="end-post">
             <div class="author-post">
-            Escrito por {{verify('post_author')}}
+            Escrito por {{post_data.post_author}}
             </div>
             <div class="comments-post">
                 <div class="comments-title">Comentários</div>
-                <div v-for="(comment, index) in post.data.data.comments" :key="index" class="comment-item">
+                <div v-for="(comment, index) in post_data.comments" :key="index" class="comment-item">
                     <div class="comment-author">
                         <div class="author-label">autor: .</div> {{comment.comment_author}}
                     </div>
@@ -47,20 +47,19 @@ export default {
     },
     data () {
         return {
-            post: []
+            post: [],
+            post_data: []
         }
     },
     methods: {
         async getPostById(id) {
             postCaller.getById(id).then(response =>{
                 this.post = response;
+                this.post_data = response.data.data;
                 this.post.data.data.post_content = this.post.data.data.post_content.replace(/\n/g, "<br/>");
                 this.post.data.data.comments.forEach((comment, index) => 
                     this.post.data.data.comments[index].comment_content = this.post.data.data.comments[index].comment_content.replace(/\n/g, "<br/>"));
             });
-        },
-        verify(attribute) {
-            return (this.post != []) ? this.post.data.data[attribute] : '';
         },
         prepareDate(date) {
             let date_converted = new Date(date);
