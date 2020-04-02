@@ -55,15 +55,15 @@ export default {
         return {
             post_model: new Post(),
             categories: {
-                0:  "Environment",
-                1:	"Environment Tips",
-                2:	"Projects",
-                3:	"Our Projects",
-                4:	"Other Projects",
-                5:	"Entertainment",
-                6:	"Food",
-                7:	"Food Tips",
-                8:	"Food Recipes"
+                0:  "Meio Ambiente",
+                1:	"Dicas de Meio Ambiente",
+                2:	"Projetos",
+                3:	"Nossos Projetos",
+                4:	"Outros Projetos",
+                5:	"Entretenimento",
+                6:	"Comida",
+                7:	"Dicas de Comida",
+                8:	"Receitas"
             },
             checked_categories: [],
             showCat: "none",
@@ -77,6 +77,7 @@ export default {
         async sendPost(model) {
             this.checkSelectedCategories();
             let response = await postCaller.publishPosts(model);
+            alert("Postado!");
             console.log(response);
         },
         checkSelectedCategories() {
@@ -97,7 +98,6 @@ export default {
         },
         onImageSelected(event) {
             this.selectedImage = event.target.files[0];
-            console.log(this.selectedImage);
         },
         sendImageToImgur() {
             if (this.selectedImage != null) {

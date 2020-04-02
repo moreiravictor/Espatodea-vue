@@ -31,39 +31,23 @@
                     </div>
                 </div>
             </div>
-                <div class="new-comment-outter">
-                <div class="new-comment">
-                    <div class="new-comment-title">
-                        Digite um novo comentário!
-                    </div>
-                    <div class="new-comment-item">
-                        <label class="comment-label">autor:</label>
-                        <input v-model="new_comment.comment_author"/>
-                    </div>
-                    <div class="new-comment-item">
-                        <label class="comment-label">comentário:</label>
-                        <textarea v-model="new_comment.comment_content" class="comment-area"/>
-                    </div>
-                    <div class="new-comment-item">
-                        <button @click="publishComment(new_comment)" class="button-comment">comentar</button>
-                    </div>
-                </div>
-            </div>
+                <CommentForm v-bind:post="post"/>
         </div>
     </div>
 </template>
 
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory';
+import CommentForm from './../components/forms/CommentForm'
 const postCaller = RepositoryFactory.get('posts');
-const commentCaller = RepositoryFactory.get('comments');
-
 
 export default {
+    components: {
+        CommentForm
+    },
     data () {
         return {
-            post: [],
-            new_comment: {}
+            post: []
         }
     },
     methods: {
@@ -75,12 +59,6 @@ export default {
                     this.post.data.data.comments[index].comment_content = this.post.data.data.comments[index].comment_content.replace(/\n/g, "<br/>"));
             });
         },
-        publishComment(model) {
-            model.comment_date = new Date();
-            model.post_id = 32;
-            commentCaller.publishComment(model);
-            this.$router.go(0)
-        },
         verify(attribute) {
             return (this.post != []) ? this.post.data.data[attribute] : '';
         },
@@ -90,7 +68,7 @@ export default {
         }
     },
     mounted() {
-        this.getPostById(32);
+        this.getPostById(1);
     }
 }
 </script>
@@ -120,9 +98,8 @@ export default {
 }
 .post-image {
     width: 100%;
-}
-.post-image-data {
-    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .middle-post {
     display: flex;
