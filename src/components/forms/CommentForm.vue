@@ -33,7 +33,8 @@ export default {
     methods: {
         publishComment(model) {
             model.post_id = this.post.data.data.post_id;
-            commentCaller.publishComment(model).then(this.$router.go());
+            commentCaller.publishComment(model)
+                            .then(res => this.post.data.data.comments.push(res.data.data));
         }
     }
 }
