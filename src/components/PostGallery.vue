@@ -1,7 +1,7 @@
 <template>
   <div id="post-gallery-outter">
     <div class="post-gallery-inner">
-      <div v-for="post in posts_data" v-bind:key="post.post_id" class="post-item">
+      <div v-for="post in posts_paginated" v-bind:key="post.post_id" class="post-item">
         <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a" href="sei la">
           <img class="post-item-image" :src="post.post_image_path"/>
           <div class="post-item-date">{{prepareDate(post.post_date)}}</div>
@@ -9,17 +9,23 @@
         </router-link>
       </div>
     </div>
+    <Pagination v-on:paginationToParent="postsToShow" :data_array="posts" :qt_page="9"/>
   </div>
 </template>
 
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory'
+import Pagination from './Pagination.vue'
 const postCaller = RepositoryFactory.get('posts');
 export default {
+  components: {
+    Pagination
+  },
   data () {
     return {
       posts:{},
-      posts_data: {}
+      posts_data: {},
+      posts_paginated: {}
     }
   },
   methods: {
@@ -27,11 +33,15 @@ export default {
       postCaller.getAll().then(res => {
         this.posts = res;
         this.posts_data = res.data.data;
+        this.posts_paginated = res.data.data.slice(0, 9);
         });
     },
     prepareDate(date) {
       let date_converted = new Date(date);
       return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
+    },
+    postsToShow(value) {
+      this.posts_paginated = value;
     }
   },
   mounted () {
