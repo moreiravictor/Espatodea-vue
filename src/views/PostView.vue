@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-                <CommentForm v-bind:post="post"/>
+                <CommentForm :post="post"/>
         </div>
     </div>
 </template>
@@ -58,16 +58,20 @@ export default {
                 this.post_data = response.data.data;
                 this.post.data.data.post_content = this.post.data.data.post_content.replace(/\n/g, "<br/>");
                 this.post.data.data.comments.forEach((comment, index) => 
-                    this.post.data.data.comments[index].comment_content = this.post.data.data.comments[index].comment_content.replace(/\n/g, "<br/>"));
+                    this.post.data.data.comments[index].comment_content = comment.comment_content.replace(/\n/g, "<br/>"));
             });
         },
         prepareDate(date) {
             let date_converted = new Date(date);
             return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
+        },
+        scrollToTop() {
+            window.scrollTo(0,0);
         }
     },
     mounted() {
-        this.getPostById(1);
+        this.getPostById(this.$route.params.post_id);
+        this.scrollToTop();
     }
 }
 </script>
@@ -85,6 +89,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 50%;
+    margin-bottom: 40px;
 }
 .post-date {
     margin-top: 20px;

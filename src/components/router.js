@@ -17,7 +17,8 @@ const routes = [
         component: PostForm
     },
     {
-        path: '/post/see',
+        path: '/post/see/:post_id',
+        name: 'post',
         component: PostView
     },
     {

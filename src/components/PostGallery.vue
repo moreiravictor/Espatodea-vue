@@ -2,7 +2,7 @@
   <div id="post-gallery-outter">
     <div class="post-gallery-inner">
       <div v-for="post in posts_data" v-bind:key="post.post_id" class="post-item">
-        <router-link to="/" class="post-item-a" href="sei la">
+        <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a" href="sei la">
           <img class="post-item-image" :src="post.post_image_path"/>
           <div class="post-item-date">{{prepareDate(post.post_date)}}</div>
           <div class="post-item-title">{{post.title}}</div>
@@ -61,8 +61,8 @@ export default {
   flex-direction: column;
   align-items: center;
   font-size: 18px;
-  width:30%;
-  margin: 1%;
+  width:29%;
+  margin: 2%;
 }
 .post-item-a {
   text-decoration: none;
