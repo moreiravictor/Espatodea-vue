@@ -4,7 +4,7 @@
         <div class="button-selection" @click="showCategories()">Categorias</div>
         <div class="inner-selection" :style="{display: showCat}">
             <div class="selection" v-for="(category, i) in categories" :key="category">
-                <input type="checkbox" :id="i" value="value" v-model="checked_categories[i]">
+                <input type="checkbox" :id="i" :value="category" v-model="checked_categories[i]">
                 <label> {{category}} </label>
             </div>
         </div>
@@ -82,7 +82,7 @@ export default {
         },
         checkSelectedCategories() {
             this.checked_categories.forEach((cat, index) => {
-                if (cat == true) {
+                if (cat === true) {
                     const new_category = {category_id: index};
                     this.post_model.post_categories.push(new_category);
                 }

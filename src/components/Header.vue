@@ -6,11 +6,11 @@
       </div>
       <div class="header-menu">
         <ul>
-          <router-link to="/post/all" class="no-decoration"><li>blog</li></router-link>
-          <router-link to="/post/form" class="no-decoration"><li>meio ambiente</li></router-link>
-          <router-link to="/" class="no-decoration"><li>entretenimento</li></router-link>
-          <router-link to="/" class="no-decoration"><li>alimentação</li></router-link>
-          <router-link to="/" class="no-decoration"><li>entenda mais</li></router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 'all'}}" class="no-decoration"><li>blog</li></router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 0}}" class="no-decoration"><li>meio ambiente</li></router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 5}}" class="no-decoration"><li>entretenimento</li></router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 6}}" class="no-decoration"><li>alimentação</li></router-link>
+          <router-link to="/post/form" class="no-decoration"><li>entenda mais</li></router-link>
         </ul>
       <div class="header-social">
           <a href="https://www.facebook.com/ecoespatodea" target="_blank" title="nosso facebook">

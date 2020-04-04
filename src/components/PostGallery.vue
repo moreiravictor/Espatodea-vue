@@ -1,7 +1,7 @@
 <template>
   <div id="post-gallery-outter">
     <div class="post-gallery-inner">
-      <div v-for="post in posts_paginated" v-bind:key="post.post_id" class="post-item">
+      <div v-for="(post, index) in posts_paginated" v-bind:key="index" class="post-item">
         <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a" href="sei la">
           <img class="post-item-image" :src="post.post_image_path"/>
           <div class="post-item-date">{{prepareDate(post.post_date)}}</div>
@@ -37,6 +37,12 @@ export default {
         this.posts_data = res.data.data;
         });
     },
+    getByCategory(category) {
+      postCaller.getByCategory(category).then(res => {
+        this.posts = res;
+        this.posts_data = res.data.data;
+      });
+    },
     prepareDate(date) {
       let date_converted = new Date(date);
       return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
@@ -47,7 +53,12 @@ export default {
     }
   },
   mounted () {
-    this.getAllPosts();
+    (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
+  },
+  watch: {
+    $route: function() {
+      (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
+    }
   }
 }
 </script>

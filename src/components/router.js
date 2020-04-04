@@ -22,7 +22,8 @@ const routes = [
         component: PostView
     },
     {
-        path: '/post/all',
+        path: '/post/gallery/:post_category',
+        name: 'gallery',
         component: PostGallery
     }
 ];

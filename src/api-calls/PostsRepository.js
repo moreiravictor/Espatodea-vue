@@ -20,5 +20,8 @@ export default {
     },
     getById(id) {
         return Repository.get(`${resource}/getById/${id}`)
+    },
+    getByCategory(category_id) {
+        return Repository.get(`${resource}/getByCategory/${category_id}`)
     }
 };
