@@ -20,7 +20,7 @@
             </div>
             <div class="comments-post">
                 <div class="comments-title">Comentários</div>
-                <div v-for="(comment, index) in post_data.comments" :key="index" class="comment-item">
+                <div v-for="(comment, index) in comments_paginated" :key="index" class="comment-item">
                     <div class="comment-author">
                         <div class="author-label">autor: .</div> {{comment.comment_author}}
                     </div>
@@ -30,6 +30,7 @@
                         {{prepareDate(comment.comment_date)}}
                     </div>
                 </div>
+                <Pagination v-on:paginationToParent="commentsToShow" :data_array="post_data.comments" :qt_page="qt_page" />
             </div>
                 <CommentForm :post="post"/>
         </div>
@@ -39,16 +40,20 @@
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory';
 import CommentForm from './../components/forms/CommentForm'
+import Pagination from './../components/Pagination'
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
     components: {
-        CommentForm
+        CommentForm,
+        Pagination
     },
     data () {
         return {
             post: [],
-            post_data: []
+            post_data: [],
+            comments_paginated: {},
+            qt_page: 4
         }
     },
     methods: {
@@ -64,6 +69,9 @@ export default {
         prepareDate(date) {
             let date_converted = new Date(date);
             return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
+        },
+        commentsToShow(value) {
+            this.comments_paginated = value;
         },
         scrollToTop() {
             window.scrollTo(0,0);

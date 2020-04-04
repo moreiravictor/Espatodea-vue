@@ -24,7 +24,6 @@ export default {
             let start = (number-1)*this.qt_page;
             this.new_data_array = this.data_array.slice(start, number*this.qt_page);
             this.$emit('paginationToParent', this.new_data_array);
-            window.scrollTo(0,10000);
         }
     },
     watch: {
@@ -44,10 +43,8 @@ export default {
 }
 .pagination-button {
     cursor:pointer;
-    background-color: cornflowerblue;
     margin: 5px;
-    color: #fff;
-    font-size: 28px;
-    border: 2px solid #F3B69B;
+    color: #000;
+    font-size: 18px;
 }
 </style>
