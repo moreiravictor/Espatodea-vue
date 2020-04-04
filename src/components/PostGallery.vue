@@ -9,7 +9,7 @@
         </router-link>
       </div>
     </div>
-    <Pagination v-on:paginationToParent="postsToShow" :data_array="posts" :qt_page="9"/>
+    <Pagination v-on:paginationToParent="postsToShow" :data_array="posts_data" :qt_page="qt_page"/>
   </div>
 </template>
 
@@ -17,6 +17,7 @@
 import { RepositoryFactory } from './../api-calls/RepositoryFactory'
 import Pagination from './Pagination.vue'
 const postCaller = RepositoryFactory.get('posts');
+
 export default {
   components: {
     Pagination
@@ -25,7 +26,8 @@ export default {
     return {
       posts:{},
       posts_data: {},
-      posts_paginated: {}
+      posts_paginated: {},
+      qt_page: 9
     }
   },
   methods: {
@@ -33,7 +35,6 @@ export default {
       postCaller.getAll().then(res => {
         this.posts = res;
         this.posts_data = res.data.data;
-        this.posts_paginated = res.data.data.slice(0, 9);
         });
     },
     prepareDate(date) {
@@ -62,7 +63,7 @@ export default {
 }
 .post-gallery-inner {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: wrap;
   width: 80%;
 }

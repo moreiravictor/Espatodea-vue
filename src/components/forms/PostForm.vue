@@ -104,7 +104,10 @@ export default {
                 axios.post('https://api.imgur.com/3/image', 
                     this.selectedImage, {
                     headers: {Authorization: `Bearer ${this.acces_token}`}})
-                    .then(res => this.post_model.post_image_path = res.data.data.link);
+                    .then(res => {
+                        this.post_model.post_image_path = res.data.data.link;
+                        alert("Imagem ok");
+                        });
             }
         },
         authLink() {

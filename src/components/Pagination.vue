@@ -21,21 +21,19 @@ export default {
     },
     methods: {
         getPaginatedData(number) {
-            let start = (number == 0) ? 0 : ((number-1)*this.qt_page);
-            this.new_data_array = this.data_array.data.data.slice(start, ((number))*this.qt_page);
+            let start = (number-1)*this.qt_page;
+            this.new_data_array = this.data_array.slice(start, number*this.qt_page);
             this.$emit('paginationToParent', this.new_data_array);
             window.scrollTo(0,10000);
-        },
-        verify(att) {
-            return (typeof att !== "undefined") ? att.data.data : [];
-        },
+        }
     },
     watch: {
         data_array: function() {
                 if (this.data_array != {}) {
-                this.qt_buttons = Math.ceil(this.data_array.data.data.length/this.qt_page);
+                this.qt_buttons = Math.ceil(this.data_array.length/this.qt_page);
+                this.getPaginatedData(1);
             }
-        },
+        }
     }
 }
 </script>
