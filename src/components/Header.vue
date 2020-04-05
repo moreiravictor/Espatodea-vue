@@ -5,12 +5,52 @@
         <router-link to="/"><img src="./../assets/espatodea.png" class="logo"></router-link>
       </div>
       <div class="header-menu">
-        <ul>
-          <router-link :to="{name:'gallery', params: {post_category: 'all'}}" class="no-decoration"><li>blog</li></router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 0}}" class="no-decoration"><li>meio ambiente</li></router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 5}}" class="no-decoration"><li>entretenimento</li></router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 6}}" class="no-decoration"><li>alimentação</li></router-link>
-          <router-link to="/post/form" class="no-decoration"><li>entenda mais</li></router-link>
+        <ul class="ul-outter">
+          <router-link :to="{name:'gallery', params: {post_category: 'all'}}" class="no-decoration">
+            <li class="li-outter">blog</li>
+          </router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 0}}" class="no-decoration">
+            <li class="li-outter" @mouseleave="displaySubEnv = hideSubMenu()" @mouseover="displaySubEnv = displaySubMenu()">meio ambiente</li>
+            <ul class="ul-inner" @mouseleave=" displaySubEnv = hideSubMenu()" @mouseover="displaySubEnv = displaySubMenu()" :style="{display: displaySubEnv}">
+              <router-link :to="{name:'gallery', params: {post_category: 1}}" class="no-decoration">
+                <li class="li-inner">Dicas de Meio Ambiente</li>
+              </router-link>
+              <router-link :to="{name:'gallery', params: {post_category: 2}}" class="no-decoration">
+                <li class="li-inner" @mouseleave="displaySubSubEnv = hideSubMenu()" @mouseover="displaySubSubEnv = displaySubMenu()">Projetos</li>
+              </router-link>
+                <ul class="ul-inner" @mouseleave="displaySubSubEnv = hideSubMenu()" @mouseover="displaySubSubEnv = displaySubMenu()" :style="{display: displaySubSubEnv}">
+                <router-link :to="{name:'gallery', params: {post_category: 3}}" class="no-decoration">
+                  <li class="li-inner">Nossos Projetos</li>
+                </router-link>
+                <router-link :to="{name:'gallery', params: {post_category: 4}}" class="no-decoration">
+                  <li class="li-inner">Outros Projetos</li>
+                </router-link>
+            </ul>
+            </ul>
+          </router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 5}}" class="no-decoration">
+            <li class="li-outter">entretenimento</li>
+          </router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 6}}" class="no-decoration">
+            <li class="li-outter" @mouseleave="displaySubAli = hideSubMenu()" @mouseover="displaySubAli = displaySubMenu()">alimentação</li>
+            <ul class="ul-inner" @mouseleave=" displaySubAli = hideSubMenu()" @mouseover="displaySubAli = displaySubMenu()" :style="{display: displaySubAli}">
+              <router-link :to="{name:'gallery', params: {post_category: 7}}" class="no-decoration">
+                <li class="li-inner">Dicas de alimentação</li>
+              </router-link>
+              <router-link :to="{name:'gallery', params: {post_category: 8}}" class="no-decoration">
+                <li class="li-inner">Receitas</li>
+              </router-link>
+            </ul>
+          </router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 9}}" class="no-decoration">
+            <li class="li-outter">entenda mais</li>
+          </router-link>
+          <router-link :to="{name:'gallery', params: {post_category: 10}}" class="no-decoration">
+            <li class="li-outter">comece aqui</li>
+          </router-link>
+          <router-link to="/post/form" class="no-decoration">
+            <li class="li-outter">postar</li>
+          </router-link>
         </ul>
       <div class="header-social">
           <a href="https://www.facebook.com/ecoespatodea" target="_blank" title="nosso facebook">
@@ -32,7 +72,23 @@
 import router from './router.js';
 
 export default {
-  router: router
+  router: router,
+  data() {
+    return {
+      displaySubEnv: 'none',
+      displaySubSubEnv: 'none',
+      displaySubAli: 'none'
+    }
+  },
+  methods: {
+    displaySubMenu() {
+      return 'block';
+    },
+    hideSubMenu() {
+      return 'none';
+    }
+  }
+
 }
 </script>
 
@@ -71,14 +127,30 @@ export default {
   font-family: "Quicksand Light";
   font-size: 20px;
 }
-ul {
+.ul-outter {
   list-style-type: none;
   display: flex;
   padding-right: 20px;
 }
-li {
+.li-outter {
   margin-right: 10px;
   padding: 5px;
+}
+.ul-inner {
+  list-style-type: none;
+  position: absolute;
+  padding: 0;
+  background-color: #F3B69B;
+  z-index: 1;
+}
+.li-inner {
+  border: 1px solid #F2D8CD;
+  text-align: center;
+  padding: 1px;
+  font-size: 18px;
+}
+.li-inner:hover {
+  background-color: #F2D8CD;
 }
 .no-decoration {
   text-decoration: none;

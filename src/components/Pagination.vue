@@ -28,7 +28,7 @@ export default {
     },
     watch: {
         data_array: function() {
-                if (this.data_array != {}) {
+            if ( Array.isArray(this.data_array) && this.data_array !== {}) {
                 this.qt_buttons = Math.ceil(this.data_array.length/this.qt_page);
                 this.getPaginatedData(1);
             }

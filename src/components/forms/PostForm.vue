@@ -63,7 +63,9 @@ export default {
                 5:	"Entretenimento",
                 6:	"Comida",
                 7:	"Dicas de Comida",
-                8:	"Receitas"
+                8:	"Receitas",
+                9: "Entenda mais",
+                10: "Comece aqui"
             },
             checked_categories: [],
             showCat: "none",

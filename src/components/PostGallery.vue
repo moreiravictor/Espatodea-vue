@@ -41,7 +41,11 @@ export default {
       postCaller.getByCategory(category).then(res => {
         this.posts = res;
         this.posts_data = res.data.data;
-      });
+      }).catch(err => {
+        alert(err);
+        this.posts_paginated = {};
+        this.posts_data = {};
+        });
     },
     prepareDate(date) {
       let date_converted = new Date(date);
