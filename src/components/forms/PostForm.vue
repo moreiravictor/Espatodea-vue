@@ -47,13 +47,13 @@
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
-import { Post } from './../../models/Post.js'
+// import { Post } from './../../models/Post.js'
 import axios from 'axios'
 const postCaller = RepositoryFactory.get('posts');
 export default {
     data() {
         return {
-            post_model: new Post(),
+            post_model: {},
             categories: {
                 0:  "Meio Ambiente",
                 1:	"Dicas de Meio Ambiente",
