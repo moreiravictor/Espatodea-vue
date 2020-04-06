@@ -6,6 +6,7 @@
         <div class="turtle">
             <img class="img-turtle" src="./../assets/turtle.png"/>
         </div>
+        <router-link class="link-login" to="/login"><div class="login-button">login</div></router-link>
         </div>
         <div class="news">
             <div class="news-text">Inscreva-se para receber os novos posts:</div>
@@ -69,6 +70,11 @@ export default {
 .img-turtle {
     height: 100%;
     width:100%
+}
+.link-login {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
 }
 .news {
     display: flex;

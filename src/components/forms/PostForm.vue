@@ -1,5 +1,5 @@
 <template>
-  <div class="outter-post">
+  <div v-if="user !== 0" class="outter-post">
       <div class="inner-selection">
         <div class="button-selection" @click="showCategories()">Categorias</div>
         <div class="inner-selection" :style="{display: showCat}">
@@ -71,7 +71,8 @@ export default {
             showCat: "none",
             selectedImage: null,
             acces_token: '',
-            client_id: ''
+            client_id: '',
+            get user() {return localStorage.getItem('user') || 0} 
         }
     },
 

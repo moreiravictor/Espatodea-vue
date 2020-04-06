@@ -49,7 +49,7 @@
             <li class="li-outter">comece aqui</li>
           </router-link>
           <router-link to="/post/form" class="no-decoration">
-            <li class="li-outter">postar</li>
+            <li v-if="user !== 0" class="li-outter">admin tools</li>
           </router-link>
         </ul>
       <div class="header-social">
@@ -77,7 +77,8 @@ export default {
     return {
       displaySubEnv: 'none',
       displaySubSubEnv: 'none',
-      displaySubAli: 'none'
+      displaySubAli: 'none',
+      get user() {return localStorage.getItem('user') || 0} 
     }
   },
   methods: {
