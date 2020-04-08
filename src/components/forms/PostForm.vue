@@ -1,6 +1,6 @@
 <template>
   <div v-if="user !== 0" class="outter-post">
-      <div class="inner-selection">
+      <div class="outter-selection">
         <div class="button-selection" @click="showCategories()">Categorias</div>
         <div class="inner-selection" :style="{display: showCat}">
             <div class="selection" v-for="(category, i) in categories" :key="category">
@@ -16,16 +16,9 @@
                         <label class="label-post">Título do post</label> 
                         <input v-model="post_model.title" placeholder="digite o título do post" required>
                     </div>
-                    <div class="combo-field">
+                    <div class="combo-field-second">
                         <label class="label-post">Autor do post</label>
                         <input v-model="post_model.post_author" placeholder="quem escreveu?" required> 
-                    </div>
-                    <div class="combo-field">
-                        <label class="label-post">Imagem do post</label>
-                        <label>acces token</label>
-                        <input style="margin-top:5px" type="text" v-model="acces_token">
-                        <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
-                        <button style="margin-top:10px" @click="sendImageToImgur()">enviar imagem</button>
                     </div>
               </div>
               <div class="central-fields">
@@ -38,6 +31,13 @@
           </div>
       </form>
       <div class="imgur-authorizatiom">
+          <div class="combo-field">
+                        <label class="label-post">Imagem do post</label>
+                        <label>acces token</label>
+                        <input style="margin-top:5px" type="text" v-model="acces_token">
+                        <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
+                        <button style="margin-top:10px" @click="sendImageToImgur()">enviar imagem</button>
+                    </div>
           <label>client_id</label>
           <input type="text" v-model="client_id">
       <a style="text-decoration: none; border: 1px solid black; margin-top: 10px" :href="authLink()" target="_blank">Clique aqui para autorizar o Imgur</a>
@@ -47,7 +47,6 @@
 
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
-// import { Post } from './../../models/Post.js'
 import axios from 'axios'
 const postCaller = RepositoryFactory.get('posts');
 export default {
@@ -124,7 +123,7 @@ export default {
 <style>
 .content {
     width: 80%;
-    height: 80vh;
+    height: 40vh;
 }
 .upper-fields {
     display: flex;
@@ -132,10 +131,11 @@ export default {
 .combo-field {
     display: flex;
     flex-direction: column;
-    padding-left: 80px;
 }
-.central-fields {
-    padding-top:10px;
+.combo-field-second {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
 }
 .label-post {
     top: 20%;
@@ -157,26 +157,30 @@ export default {
     text-align:center;
     position:relative;
     margin-top: 10px;
-    margin-left: 80px;
 }
 .button:active{
     box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
 }
 .outter-post {
     margin: 0 auto;
-    padding: 40px;
+    padding: 10px;
     border: 1px solid black;
     border-radius: 4px;
-    width: 80%;
+    width: 60%;
     display: flex;
     font-family: "Quicksand Light";
 }
 .outter-field {
-    padding-left: 12%;
+    padding-left: 2%;
 }
 .inner-selection {
     display: flex;
     flex-direction: column;
+}
+.outter-selection {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
 }
 .selection {
     margin-left: 10px;
@@ -185,7 +189,7 @@ textarea, input {
     border-radius: 4px;
 }
 #post-form {
-    width: 80%;
+    width: 50%;
 }
 .button-selection {
     display:inline-block;
@@ -203,12 +207,12 @@ textarea, input {
     text-align:center;
     position:relative;
     height: 35px;
-    margin-left: 10px;
     margin-top: 10px;
 }
 .imgur-authorizatiom {
     display: flex;
     flex-direction: column;
+    width: 20%;
 }
 
 @font-face {

@@ -1,9 +1,9 @@
 import VueRouter from 'vue-router';
 import Home from './../views/Home.vue'
-import PostForm from './forms/PostForm.vue'
 import PostView from './../views/PostView.vue'
 import PostGallery from './PostGallery.vue'
 import Login from './Login.vue'
+import PostManager from './../views/PostManager'
 import Vue from 'vue';
 
 Vue.use(VueRouter);
@@ -14,8 +14,8 @@ const routes = [
         component: Home
     },
     {
-        path: '/post/form',
-        component: PostForm
+        path: '/post/gerenciar',
+        component: PostManager
     },
     {
         path: '/post/see/:post_id',

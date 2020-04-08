@@ -48,8 +48,8 @@
           <router-link :to="{name:'gallery', params: {post_category: 10}}" class="no-decoration">
             <li class="li-outter">comece aqui</li>
           </router-link>
-          <router-link to="/post/form" class="no-decoration">
-            <li v-if="user !== 0" class="li-outter">admin tools</li>
+          <router-link to="/post/gerenciar" class="no-decoration">
+            <li v-if="user !== 0" class="li-outter">gerenciador</li>
           </router-link>
         </ul>
       <div class="header-social">
