@@ -3,10 +3,10 @@
         <div class="post-list-title">Posts</div>
         <div class="post-list-inner">
             <div v-for="(post, index) in post_list" v-bind:key="index" class="post-list-item">
-                <div class="post-item-image">
+                <div class="post-list-item-image">
                 <img class="post-item-image-inner" :src="post.post_image_path"/>
                 </div>
-                <div class="post-item-title">
+                <div class="post-list-item-title">
                 <p class="p-new">{{post.title}}</p>
                 <p class="p-new">{{post.post_author}}</p>
                 <p class="p-new">{{prepareDate(post.post_date)}}</p>
@@ -100,7 +100,7 @@ export default {
     padding-bottom: 10px;
     padding-top: 15px;
 }
-.post-item-image {
+.post-list-item-image {
     width: 150px;
     height: 100%;
     padding-left: 1%;
@@ -109,7 +109,7 @@ export default {
     width: 100%;
     height: 100%;
 }
-.post-item-title {
+.post-list-item-title {
     display: flex;
     flex-direction: column;
     font-size: 18px;
