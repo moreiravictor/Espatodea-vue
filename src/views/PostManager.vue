@@ -1,28 +1,15 @@
 <template>
     <div id="post-manager-outter">
-        <button @click="publishPost()">novo post</button>
-        <PostForm v-if="showPostForm"/>
-
+        <PostList/>
     </div>
 </template>
 
 <script>
-import PostForm from './../components/forms/PostForm'
+import PostList  from './../components/PostList'
 export default {
     components: {
-        PostForm
-    },
-    data() {
-        return {
-            showPostForm: false,
-        }
-    },
-    methods: {
-        publishPost() {
-            this.showPostForm = (this.showPostForm) ? false : true;
-        }
+        PostList
     }
-
 }
 </script>
 

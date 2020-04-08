@@ -1,0 +1,128 @@
+<template>
+    <div id="post-list-outter">
+        <div class="post-list-title">Posts</div>
+        <div class="post-list-inner">
+            <div v-for="(post, index) in post_list" v-bind:key="index" class="post-list-item">
+                <div class="post-item-image">
+                <img class="post-item-image-inner" :src="post.post_image_path"/>
+                </div>
+                <div class="post-item-title">
+                <p class="p-new">{{post.title}}</p>
+                <p class="p-new">{{post.post_author}}</p>
+                <p class="p-new">{{prepareDate(post.post_date)}}</p>
+                </div>
+                <div class="edit-post">
+                    <button @click="sendPostEdit(post)" class="button">editar</button>
+                    <button @click="removePost(post)" class="button">excluir</button>
+                </div>
+            </div>
+        </div>
+        <button class="button" @click="openForm()">novo post</button>
+        <PostForm :postModel="post_to_edit" v-if="showPostForm"/>
+    </div>
+</template>
+
+<script>
+import {RepositoryFactory} from './../api-calls/RepositoryFactory'
+import PostForm from './forms/PostForm'
+const postCaller = RepositoryFactory.get('posts');
+
+export default {
+    components: {
+        PostForm
+    },
+    data() {
+        return{
+            post_list: {},
+            showPostForm: false,
+            post_to_edit: {}
+        }
+    },
+    methods: {
+        getAllPosts() {
+            postCaller.getAll().then(res => {
+                this.post_list = res.data.data;
+            })
+        },
+        removePost(post) {
+            postCaller.deletePost(post.post_id).then(() =>{
+                alert('Post excluído!');
+                this.getAllPosts();
+            });
+        },
+        prepareDate(date) {
+            let date_converted = new Date(date);
+            return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
+        },
+        sendPostEdit(post) {
+            this.post_to_edit = post;
+            this.showPostForm = true;
+            window.scrollTo(0, 999999);
+        },
+        openForm() {
+            this.post_to_edit = {};
+            this.showPostForm = (this.showPostForm) ? false : true;
+        }
+    },
+    mounted() {
+        this.getAllPosts();
+    }
+}
+</script>
+
+<style>
+#post-list-outter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.post-list-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #F3B69B;
+    width: 50%;
+}
+.post-list-title {
+    font-size: 38px;
+    padding-bottom: 20px;
+    font-family: "Quicksand Light";
+}
+.post-list-item {
+    border: 1px solid #F3B69B;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+.post-item-image {
+    width: 150px;
+    height: 100%;
+    padding-left: 1%;
+}
+.post-item-image-inner {
+    width: 100%;
+    height: 100%;
+}
+.post-item-title {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: "Quicksand Light";
+    padding-left: 2%;
+    width: 100%;
+}
+.p-new {
+    margin: 0;
+}
+.edit-post {
+    padding: 10px;
+    width: 30%;
+}
+
+</style>

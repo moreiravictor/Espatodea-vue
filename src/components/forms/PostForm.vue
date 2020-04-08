@@ -14,20 +14,21 @@
               <div class="upper-fields">
                     <div class="combo-field">
                         <label class="label-post">Título do post</label> 
-                        <input v-model="post_model.title" placeholder="digite o título do post" required>
+                        <input v-model="postModel.title" placeholder="digite o título do post" required>
                     </div>
                     <div class="combo-field-second">
                         <label class="label-post">Autor do post</label>
-                        <input v-model="post_model.post_author" placeholder="quem escreveu?" required> 
+                        <input v-model="postModel.post_author" placeholder="quem escreveu?" required> 
                     </div>
               </div>
               <div class="central-fields">
                   <div class="combo-field">
                     <label class="label-post">Conteúdo do post</label>
-                    <textarea class="content" v-model="post_model.post_content" placeholder="digite o post" required></textarea>
+                    <textarea class="content" v-model="postModel.post_content" placeholder="digite o post" required></textarea>
                   </div>
               </div>
-            <button class="button" @click="sendPost(post_model)">Postar</button>
+            <button class="button" @click="sendPost(postModel)">{{(typeof postModel.post_id === 'undefined')? 'Postar' : 'Editar'}}</button>
+            <button class="button" @click="postModel = {}">Resetar</button>
           </div>
       </form>
       <div class="imgur-authorizatiom">
@@ -50,9 +51,9 @@ import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
 import axios from 'axios'
 const postCaller = RepositoryFactory.get('posts');
 export default {
+    props: ['postModel'],
     data() {
         return {
-            post_model: {},
             categories: {
                 0:  "Meio Ambiente",
                 1:	"Dicas de Meio Ambiente",
@@ -78,15 +79,25 @@ export default {
     methods: {
         async sendPost(model) {
             this.checkSelectedCategories();
-            let response = await postCaller.publishPosts(model);
-            alert("Postado!");
-            console.log(response);
+            if (typeof model.post_id === 'undefined') {
+                let response = await postCaller.publishPosts(model);
+                alert("Postado!");
+                console.log(response);
+            } else {
+                let response = await postCaller.patchPost(model, model.post_id);
+                alert("Atualizado!");
+                console.log(response);
+            }
+            this.postModel = {};
+            location.reload();
         },
         checkSelectedCategories() {
+            this.postModel.post_categories = [];
+            this.postModel.comments = [];
             this.checked_categories.forEach((cat, index) => {
                 if (cat === true) {
                     const new_category = {category_id: index};
-                    this.post_model.post_categories.push(new_category);
+                    this.postModel.post_categories.push(new_category);
                 }
             });
         },
@@ -107,7 +118,7 @@ export default {
                     this.selectedImage, {
                     headers: {Authorization: `Bearer ${this.acces_token}`}})
                     .then(res => {
-                        this.post_model.post_image_path = res.data.data.link;
+                        this.postModel.post_image_path = res.data.data.link;
                         alert("Imagem ok");
                         });
             }
@@ -164,7 +175,7 @@ export default {
 .outter-post {
     margin: 0 auto;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid #F3B69B;
     border-radius: 4px;
     width: 60%;
     display: flex;
