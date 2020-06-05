@@ -1,6 +1,7 @@
 <template>
   <div class="banner-outter">
             <div class="banner-img-out"><img src="./../../assets/arvore.png" class="banner-img"/></div>
+            <div class="banner-espatodea-text">Espatodea</div>
             <div class="banner-text">
                 <h2>Quem Somos</h2>
                 <p class="banner-text-bigger">
@@ -41,6 +42,9 @@ export default {
 .banner-img {
     width: 300px;
 }
+.banner-espatodea-text {
+    display: none;
+}
 .banner-text {
     color: white;
     font-family: "Quicksand Light";
@@ -55,6 +59,25 @@ export default {
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+@media(max-width: 868px) {
+    .banner-outter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .banner-img-out {
+        border: none;
+    }
+    .banner-espatodea-text {
+        display: flex;
+        color: white;
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    .banner-text {
+        display: none;
+    }
 }
 
 </style>
