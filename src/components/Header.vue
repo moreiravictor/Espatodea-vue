@@ -2,7 +2,7 @@
   <div id="header-out">
     <div class="header-elements">
       <div class="header-logo">
-        <router-link to="/"><img src="./../assets/espatodea.png" class="logo"></router-link>
+        <router-link to="/"><img src="./../assets/espatodea2.png" class="logo"></router-link>
       </div>
       <div class="header-menu">
         <ul class="ul-outter">
@@ -64,6 +64,9 @@
           </a>
       </div>
       </div>
+      <div class="menu-mobile">
+        <font-awesome-icon class="mobile-icon" :icon="['fas', 'bars']" />
+      </div>
     </div>
   </div>
 </template>
@@ -113,12 +116,11 @@ export default {
   animation-name: emerge;
   animation-duration: 2s;
   margin-left: 10%;
-
   color: white;
 }
 .logo {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 .header-menu {
   display: flex;
@@ -162,8 +164,82 @@ export default {
   color: white;
   cursor: pointer;
 }
+.menu-mobile {
+  display: none;
+}
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+@media(max-width: 1344px) {
+  .header-menu {
+    margin-right: 4%;
+    display: flex;
+    flex-direction: column;
+  }
+  .ul-outter {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 19px;
+  }
+  .header-social {
+    display: flex;
+    font-size: 12px;
+  }
+  .header-social a {
+    margin-bottom: 5px;
+  }
+}
+@media(max-width: 1078px) {
+  .header-logo {
+    margin-left: 0%;
+  }
+  .header-menu {
+    margin-right: 4%;
+    display: flex;
+    flex-direction: column;
+  }
+  .ul-outter {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 19px;
+  }
+  .header-social {
+    display: flex;
+    font-size: 12px;
+  }
+  .header-social a {
+    margin-bottom: 5px;
+  }
+}
+@media(max-width: 969px) {
+  .header-elements {
+    padding: 0px;
+  }
+  .header-logo {
+    margin-left: 1%;
+  }
+  .header-menu {
+    margin-right: 2%;
+  }
+  .ul-outter {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 14px;
+  }
+}
+@media(max-width: 769px) {
+  .header-menu {
+    display: none;
+  }
+  .menu-mobile {
+    display: flex;
+  }
+  .mobile-icon {
+    padding-right: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 36px;
+  }
 }
 </style>

@@ -10,18 +10,20 @@
         </div>
         <div class="news">
             <div class="news-text">Inscreva-se para receber os novos posts:</div>
-            <div class="news-field">
-                <label>Nome:</label>
-                <input class="input-footer" type="text"/>
+            <div class="news-field-outter">
+                <div class="news-field">
+                    <label>Nome:</label>
+                    <input class="input-footer" type="text"/>
+                </div>
+                <div class="news-field">
+                    <label>E-mail:</label>
+                    <input class="input-footer" type="text"/>
+                </div>
+                <button class="news-button">
+                    <font-awesome-icon class="button-icon" :icon="['fas', 'pencil-alt']" />
+                    <div class="news-button-text">inscreva-se</div>
+                </button>
             </div>
-            <div class="news-field">
-                <label>E-mail:</label>
-                <input class="input-footer" type="text"/>
-            </div>
-            <button class="news-button">
-                <font-awesome-icon class="button-icon" :icon="['fas', 'pencil-alt']" />
-                inscreva-se
-            </button>
         </div>
         <div class="credits">
             <font-awesome-icon class="credits-icon" :icon="['fas', 'flask']" />
@@ -78,12 +80,14 @@ export default {
 }
 .news {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 .news-text {
-    padding-right: 1%;
     font-size: 22px;
-    width:28%;
+    width:100%;
+    margin-bottom: 20px;
 }
 .news-field {
     margin-right: 10%;
@@ -91,18 +95,24 @@ export default {
     display: flex;
     flex-direction: column;
 }
+.news-field-outter {
+    width: 100%;
+    display: flex;
+}
 .input-footer {
     margin-top:5px;
-    width: 140%;
-    height: 40%;
+    width: 120%;
+    height: 100%;
     border: 1px solid rgba(255, 190, 163, 0.4);
 }
 .news-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20%;
-    margin-top: 1%;
+    height: 49%;
+    width: 27%;
+    padding: 0;
+    margin-top: 5%;
     border: 1px solid white;
     color: white;
     cursor: pointer;
@@ -135,5 +145,73 @@ export default {
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+@media(max-width: 947px) {
+    .news {
+        padding: 2%;
+    }
+    .news-text {
+        font-size: 16px;
+    }
+    .news-button {
+        width: 12%;
+        height: 40%;
+        margin-top: 7%;
+    }
+    .button-icon {
+        padding: 0px;
+    }
+    .news-button-text {
+        display: none;
+    }
+    .credits {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .credits-icon {
+        margin-bottom: 10px;
+    }
+    .credits-text {
+        font-size: 9px;
+    }
+}
+@media(max-width: 759px) {
+    .espatodea {
+        font-size: 18px;
+    }
+}
+@media(max-width: 665px) {
+        .credits {
+        display: none;
+    }
+}
+@media(max-width: 463px) {
+    .news {
+        padding-top: 0;
+        padding-bottom: 0;
+            padding-left: 22px;
+    }
+    .news-text {
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .news-field-outter {
+        flex-direction: column;
+        align-items: center;
+    }
+    .news-field {
+        font-size: 12px;
+        margin-right: 0;
+        text-align: center;
+        align-items: center;
+    }
+    .input-footer {
+        width: 80%;
+        margin-top: 0;
+    }
+    .news-button {
+        margin: 0;
+        margin-top: 5px;
+    }
 }
 </style>

@@ -3,12 +3,16 @@
       <div class="gallery-inner">
         <div v-for="(item, index) in items" :key="index" class="gallery-item">
           <div class ="item-img">
-            <img class="img-in" :src="returnImagePath(item.image)"/>
+            <img class="img-in" :src="imagePath(item.image)"/>
+            <div class="middle">
+              <router-link :to="item.route" class="text-router">
+                <div class="img-in-text">Entenda melhor</div>
+              </router-link>
+            </div>
           </div>
           <div class="lower-gallery-item">
             <div class="item-title"> {{item.title}} </div>
             <div class="item-text"> {{item.text}} </div>
-            <button class="item-button"> {{item.buttonText}} </button>
           </div>
         </div>
       </div>
@@ -24,25 +28,28 @@ export default {
           image:"feature",
           title: "Aplicativos para te ajudar",
           text: "Mês passado meu celular parou de pegar, então eu comprei um novo e com isso vem diversas responsabilidades, como descartar todo o lixo gerado de forma consciente.",
-          buttonText: "Entenda melhor!"
+          buttonText: "Entenda melhor!",
+          route: "/post/gallery/all"
         },
         {
           image:"feature2",
           title: "Entendendo o lixo",
           text: "Quando se fala de sustentabilidade logo pensamos em reciclagem e replantar árvores, mas o assunto abrange muitos tópicos e um dos mais importantes é o lixo.",
-          buttonText: "Entenda melhor!"
+          buttonText: "Entenda melhor!",
+          route: "/post/gallery/all"
         },
         {
           image:"feature3",
           title: "A Descentralização da Energia Solar",
           text: "Muito se fala sobre energias renováveis e sua importância não só para o meio-ambiente.",
-          buttonText: "Entenda melhor!"
+          buttonText: "Entenda melhor!",
+          route: "/post/gallery/all"
         }
       ]
     }
   },
   methods: {
-    returnImagePath(image) {
+    imagePath(image) {
       return require('./../../assets/' + image +'.jpg')
     }
   }
@@ -68,11 +75,38 @@ export default {
   width:30%;
 }
 .item-img {
-  height: 700px;
+  position: relative;
 }
 .img-in {
+  opacity: 1;
+  transition: .8s ease;
   width: 100%;
   height: 100%;
+}
+.item-img:hover .img-in {
+  opacity: 0.3;
+}
+.img-in-text {
+  width: 100%;
+  font-size: 3vw;
+}
+.middle {
+  width:100%;
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  font-size: 50px;
+  text-align: center;
+  color: black;
+}
+.text-router {
+  text-decoration: none;
+  color: black;
+}
+.item-img:hover .middle {
+  opacity: 1;
+  cursor: pointer;
 }
 .lower-gallery-item {
   padding: 4px;
@@ -104,5 +138,47 @@ export default {
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+@media(max-width: 1024px) {
+  .item-title {
+    font-size: 22px;
+    padding-bottom: 7px;
+  }
+  .item-text {
+    font-size: 16px;
+    padding-bottom: 6px;
+  }
+
+}
+@media(max-width: 739px) {
+  .item-title {
+    font-size: 2vw;
+  }
+  .item-text {
+    display: none;
+  }
+}
+
+@media(max-width: 425px) {
+  .img-in {
+    opacity: 1;
+    transition: .5s ease;
+  }
+  .item-img:hover .img-in {
+    opacity: 0.3;
+  }
+  .item-title {
+    text-align: left;
+    font-size: 10px;
+    padding-bottom: 7px;
+  }
+  .item-text {
+    font-size: 10px;
+    padding-bottom: 6px;
+  }
+  .item-button {
+    display: none;
+  }
+
 }
 </style>

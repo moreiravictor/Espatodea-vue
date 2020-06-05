@@ -99,9 +99,29 @@ export default {
 .post-item-image {
   width:100%;
 }
+.post-item-title, .post-item-date {
+  font-size: 2vw;
+}
 
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+
+@media(max-width: 670px) {
+  .post-item {
+      width:46%;
+  }
+  .post-item-title, .post-item-date {
+    font-size: 3vw;
+}
+}
+@media(max-width: 520px) {
+  .post-item {
+      width:100%;
+  }
+  .post-item-title, .post-item-date {
+    font-size: 4vw;
+}
 }
 </style>
