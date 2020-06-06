@@ -41,13 +41,19 @@
         <div class="mobile-menu-inner">
           <ul class="mobile-menu-ul">
             <router-link id="mobile-router" v-for="it in menu" v-bind:key="it.title" :to="{name:'gallery', params: {post_category: it.post_category}}" class="no-decoration">
-              <li class="mobile-li-outter" @mouseleave=" it.displaySub = hideSubMenu()" @mouseover="it.displaySub = displaySubMenuMob()" >{{it.title}}</li>
-              <ul v-if="it.submenu" @mouseleave=" it.displaySub = hideSubMenu()" @mouseover="it.displaySub = displaySubMenuMob()" :style="{display: it.displaySub}">
+              <li @click="showMenu()" class="mobile-li-outter">{{it.title}}</li>
+              <ul v-if="it.submenu" style="display: contents;list-style-type: none;">
                   <router-link v-for="sub in it.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
-                    <li class="mobile-li-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenuMob()">{{sub.title}}</li>
-                      <ul v-if="sub.submenu" class="ul-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenuMob()" :style="{display: sub.displaySub}">
+                    <div @click="showMenu()" style="display: flex;padding-left: 45vw; align-items: center;">
+                    <font-awesome-icon :icon="['fa', 'chevron-right']" style="font-size:10px;line-height:2vh;padding-bottom: 0.8vh;" />
+                    <li class="mobile-li-inner" style="text-align: left;text-decoration: none;">{{sub.title}}</li>
+                    </div>
+                      <ul v-if="sub.submenu" class="ul-inner" style="display: contents">
                         <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
-                          <li class="mobile-li-inner-inner">{{subsub.title}}</li>
+                          <div @click="showMenu()" style="display: flex;padding-left: 48vw; align-items: center;">
+                            <font-awesome-icon  style="font-size:10px;line-height:2vh; padding-bottom: 0.8vh;" :icon="['fa', 'chevron-right']" />
+                            <li class="mobile-li-inner-inner" style="text-align: left;">{{subsub.title}}</li>
+                          </div>
                         </router-link>
                       </ul>
                   </router-link>
@@ -76,9 +82,6 @@ export default {
   methods: {
     displaySubMenu() {
       return 'block';
-    },
-    displaySubMenuMob() {
-      return 'contents';
     },
     hideSubMenu() {
       return 'none';
@@ -203,11 +206,11 @@ export default {
   margin-bottom: 1vh;
 }
 .mobile-li-inner {
-    font-size: 3.5vw;
+    font-size: 2.5vw;
     margin-bottom: 1vh;
 }
 .mobile-li-inner-inner {
-    font-size: 3vw;
+    font-size: 2.5vw;
     margin-bottom: 1vh;
 }
 @font-face {

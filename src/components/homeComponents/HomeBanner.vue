@@ -40,7 +40,7 @@ export default {
     padding-left: 3%;
 }
 .banner-img {
-    width: 300px;
+    width: 100%;
 }
 .banner-espatodea-text {
     display: none;
