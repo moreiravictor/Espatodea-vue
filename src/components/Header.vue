@@ -39,11 +39,20 @@
       </div>
       <div class="mobile-menu" :style="{display: menu_mobile}">
         <div class="mobile-menu-inner">
-          <ul style="list-style-type: none; display: flex;flex-direction: column; align-items: center;">
-            <li>teste</li>
-            <li>teste</li>
-            <li>teste</li>
-            <li>teste</li>
+          <ul class="mobile-menu-ul">
+            <router-link id="mobile-router" v-for="it in menu" v-bind:key="it.title" :to="{name:'gallery', params: {post_category: it.post_category}}" class="no-decoration">
+              <li class="mobile-li-outter" @mouseleave=" it.displaySub = hideSubMenu()" @mouseover="it.displaySub = displaySubMenuMob()" >{{it.title}}</li>
+              <ul v-if="it.submenu" @mouseleave=" it.displaySub = hideSubMenu()" @mouseover="it.displaySub = displaySubMenuMob()" :style="{display: it.displaySub}">
+                  <router-link v-for="sub in it.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
+                    <li class="mobile-li-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenuMob()">{{sub.title}}</li>
+                      <ul v-if="sub.submenu" class="ul-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenuMob()" :style="{display: sub.displaySub}">
+                        <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
+                          <li class="mobile-li-inner-inner">{{subsub.title}}</li>
+                        </router-link>
+                      </ul>
+                  </router-link>
+                </ul>
+            </router-link>
           </ul>
         </div>
       </div>
@@ -67,6 +76,9 @@ export default {
   methods: {
     displaySubMenu() {
       return 'block';
+    },
+    displaySubMenuMob() {
+      return 'contents';
     },
     hideSubMenu() {
       return 'none';
@@ -158,7 +170,7 @@ export default {
 .mobile-menu {
   opacity: 0.9;
   margin-top: 109px;
-  height: 380px;
+  height: fit-content;
   width: 100%;
   background-color: #F2D8CD;
   position: absolute;
@@ -170,6 +182,34 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.mobile-menu-ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style-type: none; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+#mobile-router {
+  width: 100%;
+  text-align: center;
+}
+#mobile-router:hover {
+  background-color: #F3B69B;
+  cursor: pointer;
+}
+.mobile-li-outter {
+  font-size: 4vw;
+  margin-bottom: 1vh;
+}
+.mobile-li-inner {
+    font-size: 3.5vw;
+    margin-bottom: 1vh;
+}
+.mobile-li-inner-inner {
+    font-size: 3vw;
+    margin-bottom: 1vh;
+}
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
@@ -178,7 +218,6 @@ export default {
   from {opacity: 0;}
   to {opacity: 0.9;}
 }
-
 
 @media(max-width: 1344px) {
   .header-menu {
