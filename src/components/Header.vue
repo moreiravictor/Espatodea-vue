@@ -1,71 +1,51 @@
 <template>
   <div id="header-out">
-    <div class="header-elements">
-      <div class="header-logo">
-        <router-link to="/"><img src="./../assets/espatodea2.png" class="logo"></router-link>
+    <div class="header-web-mobile-out">
+      <div class="header-elements">
+        <div class="header-logo">
+          <router-link to="/"><img src="./../assets/espatodea2.png" class="logo"></router-link>
+        </div>
+        <div class="header-menu">
+          <ul class="ul-outter">
+            <router-link v-for="item in menu" v-bind:key="item.title" :to="{name:'gallery', params: {post_category: item.post_category}}" class="no-decoration">
+              <li class="li-outter" @mouseleave="item.displaySub = hideSubMenu()" @mouseover="item.displaySub = displaySubMenu()"> {{item.title}}</li>
+                <ul v-if="item.submenu" class="ul-inner" @mouseleave=" item.displaySub = hideSubMenu()" @mouseover="item.displaySub = displaySubMenu()" :style="{display: item.displaySub}">
+                  <router-link v-for="sub in item.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
+                    <li class="li-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenu()">{{sub.title}}</li>
+                      <ul v-if="sub.submenu" class="ul-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenu()" :style="{display: sub.displaySub}">
+                        <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
+                          <li class="li-inner">{{subsub.title}}</li>
+                        </router-link>
+                      </ul>
+                  </router-link>
+                </ul>
+            </router-link>
+          </ul>
+          <div class="header-social">
+              <a href="https://www.facebook.com/ecoespatodea" target="_blank" title="nosso facebook">
+                <font-awesome-icon class="header-icon" :icon="['fab', 'facebook']" />
+              </a>
+              <a href="https://www.instagram.com/ecoespatodea/" target="_blank" title="nosso instagram">
+                <font-awesome-icon class="header-icon" :icon="['fab', 'instagram']" />
+              </a>
+              <a href="https://github.com/moreiravictor" target="_blank" title="nosso desenvolvedor">
+                <font-awesome-icon class="header-icon" :icon="['fab', 'github']" />
+              </a>
+          </div>
+        </div>
+        <div class="menu-mobile-button" @click="showMenu()">
+          <font-awesome-icon class="mobile-icon" :icon="['fas', 'bars']"/>
+        </div>
       </div>
-      <div class="header-menu">
-        <ul class="ul-outter">
-          <router-link :to="{name:'gallery', params: {post_category: 'all'}}" class="no-decoration">
-            <li class="li-outter">blog</li>
-          </router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 0}}" class="no-decoration">
-            <li class="li-outter" @mouseleave="displaySubEnv = hideSubMenu()" @mouseover="displaySubEnv = displaySubMenu()">meio ambiente</li>
-            <ul class="ul-inner" @mouseleave=" displaySubEnv = hideSubMenu()" @mouseover="displaySubEnv = displaySubMenu()" :style="{display: displaySubEnv}">
-              <router-link :to="{name:'gallery', params: {post_category: 1}}" class="no-decoration">
-                <li class="li-inner">Dicas de Meio Ambiente</li>
-              </router-link>
-              <router-link :to="{name:'gallery', params: {post_category: 2}}" class="no-decoration">
-                <li class="li-inner" @mouseleave="displaySubSubEnv = hideSubMenu()" @mouseover="displaySubSubEnv = displaySubMenu()">Projetos</li>
-              </router-link>
-                <ul class="ul-inner" @mouseleave="displaySubSubEnv = hideSubMenu()" @mouseover="displaySubSubEnv = displaySubMenu()" :style="{display: displaySubSubEnv}">
-                <router-link :to="{name:'gallery', params: {post_category: 3}}" class="no-decoration">
-                  <li class="li-inner">Nossos Projetos</li>
-                </router-link>
-                <router-link :to="{name:'gallery', params: {post_category: 4}}" class="no-decoration">
-                  <li class="li-inner">Outros Projetos</li>
-                </router-link>
-            </ul>
-            </ul>
-          </router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 5}}" class="no-decoration">
-            <li class="li-outter">entretenimento</li>
-          </router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 6}}" class="no-decoration">
-            <li class="li-outter" @mouseleave="displaySubAli = hideSubMenu()" @mouseover="displaySubAli = displaySubMenu()">alimentação</li>
-            <ul class="ul-inner" @mouseleave=" displaySubAli = hideSubMenu()" @mouseover="displaySubAli = displaySubMenu()" :style="{display: displaySubAli}">
-              <router-link :to="{name:'gallery', params: {post_category: 7}}" class="no-decoration">
-                <li class="li-inner">Dicas de alimentação</li>
-              </router-link>
-              <router-link :to="{name:'gallery', params: {post_category: 8}}" class="no-decoration">
-                <li class="li-inner">Receitas</li>
-              </router-link>
-            </ul>
-          </router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 9}}" class="no-decoration">
-            <li class="li-outter">entenda mais</li>
-          </router-link>
-          <router-link :to="{name:'gallery', params: {post_category: 10}}" class="no-decoration">
-            <li class="li-outter">comece aqui</li>
-          </router-link>
-          <router-link to="/post/gerenciar" class="no-decoration">
-            <li v-if="user !== 0" class="li-outter">gerenciador</li>
-          </router-link>
-        </ul>
-      <div class="header-social">
-          <a href="https://www.facebook.com/ecoespatodea" target="_blank" title="nosso facebook">
-            <font-awesome-icon class="header-icon" :icon="['fab', 'facebook']" />
-          </a>
-          <a href="https://www.instagram.com/ecoespatodea/" target="_blank" title="nosso instagram">
-            <font-awesome-icon class="header-icon" :icon="['fab', 'instagram']" />
-          </a>
-          <a href="https://github.com/moreiravictor" target="_blank" title="nosso desenvolvedor">
-            <font-awesome-icon class="header-icon" :icon="['fab', 'github']" />
-          </a>
-      </div>
-      </div>
-      <div class="menu-mobile">
-        <font-awesome-icon class="mobile-icon" :icon="['fas', 'bars']" />
+      <div class="mobile-menu" :style="{display: menu_mobile}">
+        <div class="mobile-menu-inner">
+          <ul style="list-style-type: none; display: flex;flex-direction: column; align-items: center;">
+            <li>teste</li>
+            <li>teste</li>
+            <li>teste</li>
+            <li>teste</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -73,15 +53,15 @@
 
 <script>
 import router from './router.js';
-
+import { Menu } from './commons/menu';
 export default {
   router: router,
   data() {
     return {
-      displaySubEnv: 'none',
       displaySubSubEnv: 'none',
-      displaySubAli: 'none',
-      get user() {return localStorage.getItem('user') || 0} 
+      menu_mobile:  'none',
+      get user() {return localStorage.getItem('user') || 0},
+      menu: Menu
     }
   },
   methods: {
@@ -90,6 +70,9 @@ export default {
     },
     hideSubMenu() {
       return 'none';
+    },
+    showMenu() {
+      this.menu_mobile = (this.menu_mobile == 'none') ? 'block' : 'none';
     }
   }
 
@@ -105,12 +88,17 @@ export default {
   align-items: center;
   margin-bottom: 40px;
 }
+.header-web-mobile-out {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .header-elements {
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
 }
 .header-logo {
   animation-name: emerge;
@@ -164,13 +152,34 @@ export default {
   color: white;
   cursor: pointer;
 }
-.menu-mobile {
+.menu-mobile-button {
   display: none;
+}
+.mobile-menu {
+  opacity: 0.9;
+  margin-top: 109px;
+  height: 380px;
+  width: 100%;
+  background-color: #F2D8CD;
+  position: absolute;
+  z-index: 1;
+  animation-name: appear;
+  animation-duration: 1s;
+}
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
 }
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
 }
+@keyframes appear {
+  from {opacity: 0;}
+  to {opacity: 0.9;}
+}
+
+
 @media(max-width: 1344px) {
   .header-menu {
     margin-right: 4%;
@@ -192,7 +201,7 @@ export default {
 }
 @media(max-width: 1078px) {
   .header-logo {
-    margin-left: 0%;
+    margin-left: 1%;
   }
   .header-menu {
     margin-right: 4%;
@@ -232,7 +241,7 @@ export default {
   .header-menu {
     display: none;
   }
-  .menu-mobile {
+  .menu-mobile-button {
     display: flex;
   }
   .mobile-icon {
