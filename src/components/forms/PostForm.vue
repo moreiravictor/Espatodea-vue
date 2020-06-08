@@ -81,15 +81,12 @@ export default {
             this.checkSelectedCategories();
             if (typeof model.post_id === 'undefined') {
                 let response = await postCaller.publishPosts(model);
-                alert("Postado!");
-                console.log(response);
+                this.$alert(response.data.data.title, 'Postado!', 'success').then(() => location.reload());
             } else {
                 let response = await postCaller.patchPost(model, model.post_id);
-                alert("Atualizado!");
-                console.log(response);
+                this.$alert(response.data.data.title, 'Atualizado!', 'success').then(() => location.reload());
             }
             this.postModel = {};
-            location.reload();
         },
         checkSelectedCategories() {
             this.postModel.post_categories = [];

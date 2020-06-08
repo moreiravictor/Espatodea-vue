@@ -6,7 +6,10 @@
         <div class="turtle">
             <img class="img-turtle" src="./../assets/turtle.png"/>
         </div>
-        <router-link class="link-login" to="/login"><div class="login-button">login</div></router-link>
+        <div class="div-footer-left">
+            <router-link class="link-login" to="/login"> <div class="login-button">login</div> </router-link>
+            <router-link v-if="user !==0" class="link-login" to="/post/gerenciar"> <div class="admin-button">admin</div> </router-link>
+        </div>
         </div>
         <div class="news">
             <div class="news-text">Inscreva-se para receber os novos posts:</div>
@@ -38,7 +41,11 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            get user() {return localStorage.getItem('user') || 0}
+        }
+    }
 }
 </script>
 
@@ -77,6 +84,18 @@ export default {
     text-decoration: none;
     font-size: 18px;
     color: white;
+}
+.login-button {
+    margin-top: 10px;
+    cursor: pointer;
+}
+.admin-button {
+    margin-top: 10px;
+    cursor: pointer;
+    margin-left: 0.6vw;
+}
+.div-footer-left {
+    display: flex;
 }
 .news {
     display: flex;

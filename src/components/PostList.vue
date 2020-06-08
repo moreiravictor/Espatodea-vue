@@ -45,9 +45,20 @@ export default {
             })
         },
         removePost(post) {
-            postCaller.deletePost(post.post_id).then(() =>{
-                alert('Post excluído!');
-                this.getAllPosts();
+            this.$fire({
+                title: 'Tem certeza que deseja excluir o post?',
+                confirmButtonText: 'sim',
+                cancelButtonText: 'não',
+                showCancelButton: true
+                }).then( result => {
+                if (result.value) {
+                    postCaller.deletePost(post.post_id).then(() =>{
+                        this.$alert('Post excluído!','', 'success');
+                        this.getAllPosts();
+                    });
+                } else {
+                    this.$alert('Post não foi excluído!','', 'info');
+                }
             });
         },
         prepareDate(date) {

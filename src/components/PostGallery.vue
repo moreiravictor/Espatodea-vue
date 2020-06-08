@@ -41,10 +41,10 @@ export default {
       postCaller.getByCategory(category).then(res => {
         this.posts = res;
         this.posts_data = res.data.data;
-      }).catch(err => {
-        alert(err);
+      }).catch( () => {
         this.posts_paginated = {};
         this.posts_data = {};
+        this.$alert('Ainda não temos nenhum post nesta categoria', 'Desculpe-nos', 'warning').then( () => this.$router.push('/'));
         });
     },
     prepareDate(date) {

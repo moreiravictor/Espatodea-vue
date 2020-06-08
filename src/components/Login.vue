@@ -25,15 +25,13 @@ export default {
     methods: {
         login(user) {
             loginCaller.connectAsAdmin(user.username, user.password).then(res => {
-                alert('logado');
                 localStorage.user = JSON.stringify(res.data.data);
-                location.reload();
-            }).catch(res => res.then(alert('Usuário não cadastrado')));
+                this.$alert('Logado', 'Aviso', 'success').then(() => location.reload());
+            }).catch(res => res.then(this.$alert('Usuário não cadastrado', 'Aviso', 'warning')));
         },
         logout() {
             localStorage.removeItem('user');
-            location.reload();
-            alert("deslogado");
+            this.$alert('Deslogado', 'Aviso', 'success').then(() => location.reload());
         }
     }
 }
