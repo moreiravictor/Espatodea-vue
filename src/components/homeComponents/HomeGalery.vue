@@ -13,6 +13,7 @@
           <div class="lower-gallery-item">
             <div class="item-title"> {{item.title}} </div>
             <div class="item-text"> {{item.text}} </div>
+            <router-link :to="item.route" class="text-router"> <button class="item-button"> {{item.buttonText}} </button> </router-link>
           </div>
         </div>
       </div>
@@ -26,23 +27,23 @@ export default {
       items: [
         {
           image:"feature",
-          title: "Aplicativos para te ajudar",
-          text: "Mês passado meu celular parou de pegar, então eu comprei um novo e com isso vem diversas responsabilidades, como descartar todo o lixo gerado de forma consciente.",
-          buttonText: "Entenda melhor!",
+          title: "Dicas de alimentação",
+          text: "Mês passado meu celular parou de pegar, então eu comprei um novo.",
+          buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
           image:"feature2",
-          title: "Entendendo o lixo",
-          text: "Quando se fala de sustentabilidade logo pensamos em reciclagem e replantar árvores, mas o assunto abrange muitos tópicos e um dos mais importantes é o lixo.",
-          buttonText: "Entenda melhor!",
+          title: "Nossos projetos",
+          text: "Quando se fala de sustentabilidade logo pensamos em reciclagem e replantar árvores.",
+          buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
           image:"feature3",
-          title: "A Descentralização da Energia Solar",
+          title: "Meio ambiente",
           text: "Muito se fala sobre energias renováveis e sua importância não só para o meio-ambiente.",
-          buttonText: "Entenda melhor!",
+          buttonText: "Entenda!",
           route: "/post/gallery/all"
         }
       ]
@@ -61,7 +62,7 @@ export default {
 #homeGallery-outter {
   width: 100%;
   font-family: "Quicksand Light";
-  margin-bottom: 40px;
+  margin-bottom: 2%;
 }
 .gallery-inner {
   display: flex;
@@ -110,14 +111,12 @@ export default {
 }
 .lower-gallery-item {
   padding: 4px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .item-title {
   font-weight: bold;
-  margin-top: 10px;
   font-size: 26px;
   padding-bottom: 15px;
 }
@@ -128,11 +127,13 @@ export default {
 .item-button {
   margin-bottom: 10px;
   font-family: "Quicksand Light";
-  font-size: 19px;
-  width: 180px;
-  height: 40px;
+  font-size: 2vw;
+  width: fit-content;
+  height: fit-content;
   background-color: white;
-  border: 2px solid #F3B69B;
+  border: 1px solid #F3B69B;
+  display: none;
+  text-decoration: none;
 }
 
 @font-face {
@@ -157,6 +158,10 @@ export default {
   .item-text {
     display: none;
   }
+  .item-button {
+    display: flex;
+    text-decoration: none;
+  }
 }
 
 @media(max-width: 425px) {
@@ -175,9 +180,6 @@ export default {
   .item-text {
     font-size: 10px;
     padding-bottom: 6px;
-  }
-  .item-button {
-    display: none;
   }
 
 }

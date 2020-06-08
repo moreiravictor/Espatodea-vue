@@ -42,17 +42,17 @@
           <ul class="mobile-menu-ul">
             <router-link id="mobile-router" v-for="it in menu" v-bind:key="it.title" :to="{name:'gallery', params: {post_category: it.post_category}}" class="no-decoration">
               <li @click="showMenu()" class="mobile-li-outter">{{it.title}}</li>
-              <ul v-if="it.submenu" style="display: contents;list-style-type: none;">
+              <ul v-if="it.submenu" class="mobile-menu-ul-inner">
                   <router-link v-for="sub in it.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
-                    <div @click="showMenu()" style="display: flex;padding-left: 45vw; align-items: center;">
-                    <font-awesome-icon :icon="['fa', 'chevron-right']" style="font-size:10px;line-height:2vh;padding-bottom: 0.8vh;" />
-                    <li class="mobile-li-inner" style="text-align: left;text-decoration: none;">{{sub.title}}</li>
+                    <div @click="showMenu()" class="mobile-submenu-div">
+                    <font-awesome-icon :icon="['fa', 'chevron-right']" class="mobile-submenu-icon"/>
+                    <li class="mobile-li-inner">{{sub.title}}</li>
                     </div>
-                      <ul v-if="sub.submenu" class="ul-inner" style="display: contents">
+                      <ul v-if="sub.submenu" class="mobile-ul-inner-inner">
                         <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
-                          <div @click="showMenu()" style="display: flex;padding-left: 48vw; align-items: center;">
-                            <font-awesome-icon  style="font-size:10px;line-height:2vh; padding-bottom: 0.8vh;" :icon="['fa', 'chevron-right']" />
-                            <li class="mobile-li-inner-inner" style="text-align: left;">{{subsub.title}}</li>
+                          <div @click="showMenu()" class="mobile-subsubmenu-div">
+                            <font-awesome-icon class="mobile-submenu-icon" :icon="['fa', 'chevron-right']" />
+                            <li class="mobile-li-inner-inner">{{subsub.title}}</li>
                           </div>
                         </router-link>
                       </ul>
@@ -101,7 +101,7 @@ export default {
   background-color: #F3B69B;
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 2%;
 }
 .header-web-mobile-out {
   width: 100%;
@@ -138,16 +138,20 @@ export default {
   display: flex;
   padding-right: 20px;
 }
+.ul-inner {
+  list-style-type: none;
+}
 .li-outter {
   margin-right: 10px;
   padding: 5px;
 }
-.ul-inner {
+.mobile-ul-inner-inner {
   list-style-type: none;
   position: absolute;
   padding: 0;
   background-color: #F3B69B;
   z-index: 1;
+  display: contents;
 }
 .li-inner {
   border: 1px solid #F2D8CD;
@@ -193,6 +197,25 @@ export default {
   flex-direction: column; 
   align-items: center;
 }
+.mobile-menu-ul-inner {
+  display: contents;
+  list-style-type: none;
+}
+.mobile-submenu-div {
+  display: flex;
+  padding-left: 45vw;
+  align-items: center;
+}
+.mobile-submenu-icon {
+  font-size:1.2vh;
+  line-height:2vh;
+  padding-bottom: 0.8vh;
+}
+.mobile-subsubmenu-div {
+  display: flex;
+  padding-left: 48vw; 
+  align-items: center;
+}
 #mobile-router {
   width: 100%;
   text-align: center;
@@ -208,10 +231,13 @@ export default {
 .mobile-li-inner {
     font-size: 2.5vw;
     margin-bottom: 1vh;
+    text-align: left;
+    text-decoration: none;
 }
 .mobile-li-inner-inner {
     font-size: 2.5vw;
     margin-bottom: 1vh;
+    text-align: left;
 }
 @font-face {
   font-family: "Quicksand Light";

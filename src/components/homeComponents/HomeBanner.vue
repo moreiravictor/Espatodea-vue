@@ -33,9 +33,11 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(243, 182, 155, .4);
-    margin-bottom: 40px;
+    margin-bottom: 2%;
 }
 .banner-img-out {
+    display: flex;
+    justify-content: center;
     border-right: 1px solid white;
     padding-left: 3%;
 }
@@ -69,6 +71,9 @@ export default {
     .banner-img-out {
         border: none;
     }
+    .banner-img {
+    width: 40%;
+    }   
     .banner-espatodea-text {
         display: flex;
         color: white;

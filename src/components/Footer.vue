@@ -46,7 +46,7 @@ export default {
 .footer-outter {
     display: flex;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 2%;
     width: 100%;
     height: 150px;
     background-color: #F3B69B;
