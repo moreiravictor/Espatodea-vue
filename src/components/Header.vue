@@ -12,7 +12,7 @@
                 <ul v-if="item.submenu" class="ul-inner" @mouseleave=" item.displaySub = hideSubMenu()" @mouseover="item.displaySub = displaySubMenu()" :style="{display: item.displaySub}">
                   <router-link v-for="sub in item.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
                     <li class="li-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenu()">{{sub.title}}</li>
-                      <ul v-if="sub.submenu" class="ul-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenu()" :style="{display: sub.displaySub}">
+                      <ul v-if="sub.submenu" class="ul-inner-inner" @mouseleave="sub.displaySub = hideSubMenu()" @mouseover="sub.displaySub = displaySubMenu()" :style="{display: sub.displaySub}">
                         <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
                           <li class="li-inner">{{subsub.title}}</li>
                         </router-link>
@@ -140,10 +140,28 @@ export default {
 }
 .ul-inner {
   list-style-type: none;
+  position: absolute;
+  z-index: 1;
+  width: fit-content;
+  padding-left: 0;
+  border: 1px solid white;
+  background-color: #f2c3af;
+}
+.ul-inner-inner {
+  list-style-type: none;
+  position: absolute;
+  z-index: 1;
+  width: fit-content;
+  padding-left: 0;
+  border: 1px solid white;
+  background-color: #f2c3af;
 }
 .li-outter {
   margin-right: 10px;
   padding: 5px;
+}
+.li-outter:hover {
+  color: black;
 }
 .mobile-ul-inner-inner {
   list-style-type: none;
@@ -160,8 +178,9 @@ export default {
   font-size: 18px;
 }
 .li-inner:hover {
-  background-color: #F2D8CD;
+  background-color: #f1e2db;
 }
+
 .no-decoration {
   text-decoration: none;
   color: white;
@@ -170,6 +189,9 @@ export default {
   padding-right: 20px;
   color: white;
   cursor: pointer;
+}
+.header-icon:hover {
+  color: black;
 }
 .menu-mobile-button {
   display: none;
