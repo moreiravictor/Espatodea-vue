@@ -232,5 +232,16 @@ export default {
     }
 
 }
+@media(max-width: 600px) {
+    .middle-post {
+        font-size: 20px;
+    }
+    .end-post {
+        width: 80%;
+    }
+    .new-comment-title {
+        font-size: 5vw;
+    }
+}
 
 </style>
