@@ -101,12 +101,14 @@ export default {
 }
 .post-date {
     margin-top: 20px;
+    text-align: center;
 }
 .post-title {
     margin-top: 10px;
     margin-bottom: 30px;
-    font-size: 34px;
+    font-size: 3vw;
     font-weight: bold;
+    text-align: center;
 }
 .post-image {
     width: 100%;
@@ -116,21 +118,23 @@ export default {
 .middle-post {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
     align-items: center;
     justify-content: center;
     text-align: justify;
-    font-size: 20px;
-    line-height: 40px;
+    font-size: 30px;
+    line-height: 30px;
     margin-bottom: 20px;
 }
 .end-post {
    width:50%; 
    display: flex;
+    justify-content: center;
    flex-direction: column;
 }
 .author-post {
     display: flex;
+    justify-content: center;
     width: 100%;
     height: 100%;
     font-weight: bold;
@@ -144,15 +148,14 @@ export default {
 }
 .comments-title {
     margin-bottom: 2%;
-    font-size: 40px;
+    font-size: 4vw;
     text-align: center;
 }
 .comment-item {
     display: flex;
-    width: 60%;
+    width: 100%;
     flex-direction: column;
     border-bottom: 1px solid black;
-    /* border-top: 1px solid black; */
     padding: 1% 0.5% 1% 0.5%;
     margin-bottom: 10px;
 }
@@ -175,7 +178,7 @@ export default {
     align-items: center;
 }
 .new-comment {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -199,7 +202,7 @@ export default {
 }
 .button-comment {
     margin-top: 4%;
-    width: 20%;
+    width: fit-content;
     height: 30px;
     border: 0.1px solid #000;
     color: #000;
@@ -216,6 +219,18 @@ export default {
 @font-face {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+}
+@media(max-width: 1344px) {
+    .middle-post {
+        width: 80%;
+    }
+    .upper-post {
+        width: 100%;
+    }
+    .post-image-data {
+        max-width: 80%;
+    }
+
 }
 
 </style>
