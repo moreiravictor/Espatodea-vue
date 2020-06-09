@@ -18,6 +18,10 @@ const routes = [
         component: PostManager
     },
     {
+        path: '/post/gerenciar/:acces_token',
+        component: PostManager
+    },
+    {
         path: '/post/see/:post_id',
         name: 'post',
         component: PostView
