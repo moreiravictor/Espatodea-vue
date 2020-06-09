@@ -18,7 +18,7 @@ const routes = [
         component: PostManager
     },
     {
-        path: '/post/gerenciar/:acces_token',
+        path: '/post/gerenciar/&access_token=:acces_token&expires_in=:expires_in&token_type=:token_type&refresh_token=:refresh_token&account_username=:account_username&account_id=:account_id',
         component: PostManager
     },
     {

@@ -34,14 +34,9 @@
       <div class="imgur-authorizatiom">
           <div class="combo-field">
                         <label class="label-post">Imagem do post</label>
-                        <label>acces token</label>
-                        <input style="margin-top:5px" type="text" v-model="acces_token">
                         <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
-                        <button style="margin-top:10px" @click="sendImageToImgur()">enviar imagem</button>
+                        <button style="margin-top:10px" class="button-selection" @click="sendImageToImgur()">enviar imagem</button>
                     </div>
-          <label>client_id</label>
-          <input type="text" v-model="client_id">
-      <a style="text-decoration: none; border: 1px solid black; margin-top: 10px" :href="authLink()" target="_blank">Clique aqui para autorizar o Imgur</a>
       </div>
   </div>
 </template>
@@ -71,7 +66,6 @@ export default {
             showCat: "none",
             selectedImage: null,
             acces_token: '',
-            client_id: '',
             get user() {return localStorage.getItem('user') || 0} 
         }
     },
@@ -110,21 +104,19 @@ export default {
             this.selectedImage = event.target.files[0];
         },
         sendImageToImgur() {
-            if (this.selectedImage != null) {
+            if (this.selectedImage != null && this.$route.params.acces_token) {
                 axios.post('https://api.imgur.com/3/image', 
                     this.selectedImage, {
-                    headers: {Authorization: `Bearer ${this.acces_token}`}})
+                    headers: {Authorization: `Bearer ${this.$route.params.acces_token}`}})
                     .then(res => {
                         this.postModel.post_image_path = res.data.data.link;
-                        alert("Imagem ok");
+                        this.$alert('Imagem enviada!', 'Sucesso', 'success');
                         });
+            } else {
+                this.$alert('Você precisa selecionar uma imagem', 'Erro', 'error');
             }
-        },
-        authLink() {
-            return `https://api.imgur.com/oauth2/authorize?client_id=${this.client_id}&response_type=token`;
         }
     }
-
 }
 </script>
 
@@ -214,7 +206,8 @@ textarea, input {
     box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
     text-align:center;
     position:relative;
-    height: 35px;
+    height: fit-content;
+    width: fit-content;
     margin-top: 10px;
 }
 .imgur-authorizatiom {
