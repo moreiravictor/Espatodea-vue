@@ -99,8 +99,8 @@ export default {
 .post-item-image {
   width:100%;
 }
-.post-item-title, .post-item-date {
-  font-size: 2vw;
+.post-item-date {
+  font-size: 1.2vw;
 }
 
 @font-face {
