@@ -30,6 +30,7 @@ export default {
   position: relative;
   background: #42b983;
   color: #fff;
+  max-height:82vh;
 }
 .VueCarousel {
     margin-bottom: 2%;
