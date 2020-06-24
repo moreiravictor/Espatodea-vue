@@ -3,7 +3,7 @@
     <div class="header-web-mobile-out">
       <div class="header-elements">
         <div class="header-logo">
-          <router-link to="/"><img src="./../assets/espatodea2.png" class="logo"></router-link>
+          <router-link to="/"><img src="./../assets/espatodeaGrosso.png" class="logo"></router-link>
         </div>
         <div class="header-menu">
           <ul class="ul-outter">
