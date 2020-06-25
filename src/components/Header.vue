@@ -40,25 +40,31 @@
       <div class="mobile-menu" :style="{display: menu_mobile}">
         <div class="mobile-menu-inner">
           <ul class="mobile-menu-ul">
-            <router-link id="mobile-router" v-for="it in menu" v-bind:key="it.title" :to="{name:'gallery', params: {post_category: it.post_category}}" class="no-decoration">
-              <li @click="showMenu()" class="mobile-li-outter">{{it.title}}</li>
-              <ul v-if="it.submenu" class="mobile-menu-ul-inner">
-                  <router-link v-for="sub in it.submenu" v-bind:key="sub.title" :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
-                    <div @click="showMenu()" class="mobile-submenu-div">
-                    <font-awesome-icon :icon="['fa', 'chevron-right']" class="mobile-submenu-icon"/>
-                    <li class="mobile-li-inner">{{sub.title}}</li>
+            <div id="mobile-inner-outter" v-for="it in menu" v-bind:key="it.title">
+              <div class="mobile-inner-inner">
+                <router-link :to="{name:'gallery', params: {post_category: it.post_category}}" class="no-decoration">
+                  <li class="mobile-li-outter" @click="showMenu()">{{it.title}}</li>
+                </router-link>
+                <font-awesome-icon @click="it.displaySub = (it.displaySub == 'none') ? displaySubMobile() : hideSubMenu()" v-if="it.submenu" :icon="(it.displaySub == 'none') ? subicons.down : subicons.up" class="mobile-submenu-icon"/>
+              </div>
+              <ul v-if="it.submenu" class="mobile-menu-ul-inner" :style="{display: it.displaySub}">
+                  <div v-for="sub in it.submenu" v-bind:key="sub.title">
+                    <div class="mobile-submenu-div">
+                    <router-link :to="{name:'gallery', params: {post_category: sub.post_category}}" class="no-decoration">
+                      <li class="mobile-li-inner" @click="showMenu(), sub.displaySub=hideSubMenu(), it.displaySub = hideSubMenu()">{{sub.title}}</li>
+                    </router-link>
+                    <font-awesome-icon @click="sub.displaySub = (sub.displaySub == 'none') ? displaySubMobile() : hideSubMenu()" v-if="sub.submenu" :icon="(sub.displaySub == 'none') ? subicons.down : subicons.up" class="mobile-submenu-icon"/>
                     </div>
-                      <ul v-if="sub.submenu" class="mobile-ul-inner-inner">
+                      <ul v-if="sub.submenu" class="mobile-ul-inner-inner" :style="{display: sub.displaySub}">
                         <router-link v-for="subsub in sub.submenu" v-bind:key="subsub.title" :to="{name:'gallery', params: {post_category: subsub.post_category}}" class="no-decoration">
-                          <div @click="showMenu()" class="mobile-subsubmenu-div">
-                            <font-awesome-icon class="mobile-submenu-icon" :icon="['fa', 'chevron-right']" />
+                          <div @click="showMenu(), sub.displaySub=hideSubMenu(), it.displaySub = hideSubMenu()" class="mobile-subsubmenu-div">
                             <li class="mobile-li-inner-inner">{{subsub.title}}</li>
                           </div>
                         </router-link>
                       </ul>
-                  </router-link>
+                  </div>
                 </ul>
-            </router-link>
+            </div>
           </ul>
         </div>
       </div>
@@ -75,6 +81,11 @@ export default {
     return {
       displaySubSubEnv: 'none',
       menu_mobile:  'none',
+      submenu_mobile: 'none',
+      subicons: {
+        up: ['fa', 'chevron-up'],
+        down: ['fa', 'chevron-down']
+      },
       get user() {return localStorage.getItem('user') || 0},
       menu: Menu
     }
@@ -82,6 +93,9 @@ export default {
   methods: {
     displaySubMenu() {
       return 'block';
+    },
+    displaySubMobile() {
+      return 'contents';
     },
     hideSubMenu() {
       return 'none';
@@ -163,6 +177,11 @@ export default {
 .li-outter:hover {
   color: black;
 }
+.mobile-inner-inner {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
 .mobile-ul-inner-inner {
   list-style-type: none;
   position: absolute;
@@ -220,29 +239,37 @@ export default {
   align-items: center;
 }
 .mobile-menu-ul-inner {
-  display: contents;
   list-style-type: none;
+  flex-direction: column;
+  margin-left: 0;
+  padding-left: 0;
 }
 .mobile-submenu-div {
   display: flex;
-  padding-left: 45vw;
   align-items: center;
+  justify-content: center;
+  animation-name: appear;
+  animation-duration: 1s;
 }
 .mobile-submenu-icon {
-  font-size:1.2vh;
+  font-size:2vh;
   line-height:2vh;
   padding-bottom: 0.8vh;
+  margin-left:0.5vw;
+  color: white;
 }
 .mobile-subsubmenu-div {
   display: flex;
-  padding-left: 48vw; 
   align-items: center;
+  justify-content: center;
+  animation-name: appear;
+  animation-duration: 1s;
 }
-#mobile-router {
+#mobile-inner-outter {
   width: 100%;
   text-align: center;
 }
-#mobile-router:hover {
+#mobile-inner-outter:hover {
   background-color: #F3B69B;
   cursor: pointer;
 }
@@ -340,5 +367,10 @@ export default {
     cursor: pointer;
     font-size: 36px;
   }
+}
+@media(max-width: 439px) {
+  .mobile-submenu-icon {
+  font-size:1.2vh;
+}
 }
 </style>
