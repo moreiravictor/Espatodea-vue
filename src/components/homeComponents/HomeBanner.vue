@@ -1,6 +1,7 @@
 <template>
   <div class="banner-outter">
             <div class="banner-img-out"><img src="./../../assets/arvore.png" class="banner-img"/></div>
+            <div class="line-between"></div>
             <div class="banner-espatodea-text">Espatodea</div>
             <div class="banner-text">
                 <h2>Quem Somos</h2>
@@ -38,8 +39,13 @@ export default {
 .banner-img-out {
     display: flex;
     justify-content: center;
-    border-right: 1px solid white;
     padding-left: 3%;
+}
+.line-between {
+    width: 2px;
+    height: 30vh;
+    background-color: white;
+    display: block;
 }
 .banner-img {
     width: 100%;
@@ -81,6 +87,9 @@ export default {
         margin-bottom: 10px;
     }
     .banner-text {
+        display: none;
+    }
+    .line-between {
         display: none;
     }
 }
