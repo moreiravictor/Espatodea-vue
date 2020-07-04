@@ -105,7 +105,7 @@ export default {
 
 @font-face {
   font-family: "Quicksand Light";
-  src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+  src: url("./../assets/fonts/Quicksand_Light.otf");
 }
 
 @media(max-width: 670px) {

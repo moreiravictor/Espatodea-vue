@@ -4,7 +4,6 @@
             <div class="line-between"></div>
             <div class="banner-espatodea-text">Espatodea</div>
             <div class="banner-text">
-                <h2>Quem Somos</h2>
                 <p class="banner-text-bigger">
                     Somos um casal que teve uma ideia a partir de um incômodo. Mas qual o incômodo? 
                     Bem... Você sabe plantar o que come? Você sabe reciclar o lixo que produz? Sequer 
@@ -13,9 +12,6 @@
                     pelo Estado em conjunto com grandes corporações, em que o indivíduo ou comunidades 
                     menores (como a família) acabaram por perder, com o tempo, sua autonomia dentro da 
                     produção daquilo que serve para satisfazer até mesmo suas necessidades mais fundamentais. 
-                    Além disso, nos colocamos no centro do universo e esquecemos do tamanho dele e do que fizemos 
-                    ao planeta que chamamos de lar. Nos importamos com tantas coisas superficiais e deixamos de 
-                    lado os cuidados com o que nos dá a vida.
                 </p>
             </div>
         </div>
@@ -39,12 +35,15 @@ export default {
 .banner-img-out {
     display: flex;
     justify-content: center;
-    padding-left: 3%;
+    padding-left: 6%;
+    padding-right: 6%;
+    /* height: 80%; */
+    width: 45%;
 }
 .line-between {
     width: 2px;
-    height: 30vh;
-    background-color: white;
+    height: 22vh;
+    background-color: #406652;
     display: block;
 }
 .banner-img {
@@ -54,19 +53,19 @@ export default {
     display: none;
 }
 .banner-text {
-    color: white;
+    color: #406652;
     font-family: "Quicksand Light";
-    font-size: 22px;
+    font-size: 24px;
     padding: 2% 3% 3% 3%;
     padding-right: 10%;
 }
 .banner-text-bigger {
-    color: rgba(0, 0, 0, 0.993);
+    color: #406652;
 }
 
 @font-face {
   font-family: "Quicksand Light";
-  src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+  src: url("./../../assets/fonts/Quicksand_Light.otf");
 }
 @media(max-width: 868px) {
     .banner-outter {
@@ -79,6 +78,8 @@ export default {
     }
     .banner-img {
     width: 40%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     }   
     .banner-espatodea-text {
         display: flex;

@@ -218,6 +218,6 @@ textarea, input {
 
 @font-face {
   font-family: "Quicksand Light";
-  src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+  src: url("./../../assets/fonts/Quicksand_Light.otf");
 }
 </style>

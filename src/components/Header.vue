@@ -290,7 +290,7 @@ export default {
 }
 @font-face {
   font-family: "Quicksand Light";
-  src: url("./../assets/fonts/Quicksand_Light.otf") format("otf");
+  src: url("./../assets/fonts/Quicksand_Light.otf");
 }
 @keyframes appear {
   from {opacity: 0;}

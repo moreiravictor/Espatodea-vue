@@ -26,21 +26,21 @@ export default {
     return {
       items: [
         {
-          image:"feature",
+          image:"destaque1",
           title: "Dicas de alimentação",
           text: "Mês passado meu celular parou de pegar, então eu comprei um novo.",
           buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
-          image:"feature2",
+          image:"destaque2",
           title: "Nossos projetos",
           text: "Quando se fala de sustentabilidade logo pensamos em reciclagem e replantar árvores.",
           buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
-          image:"feature3",
+          image:"destaque3",
           title: "Meio ambiente",
           text: "Muito se fala sobre energias renováveis e sua importância não só para o meio-ambiente.",
           buttonText: "Entenda!",
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     imagePath(image) {
-      return require('./../../assets/' + image +'.jpg')
+      return require('./../../assets/' + image +'.png')
     }
   }
 
@@ -77,6 +77,7 @@ export default {
 }
 .item-img {
   position: relative;
+  height: 100%;
 }
 .img-in {
   opacity: 1;
@@ -138,7 +139,7 @@ export default {
 
 @font-face {
   font-family: "Quicksand Light";
-  src: url("./../../assets/fonts/Quicksand_Light.otf") format("otf");
+  src: url("./../../assets/fonts/Quicksand_Light.otf");
 }
 @media(max-width: 1024px) {
   .item-title {
