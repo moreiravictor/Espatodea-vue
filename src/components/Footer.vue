@@ -24,9 +24,10 @@
                     <div class="news-button-text">inscreva-se</div>
                 </button>
             </div>
+            <router-link v-if="user !==0" class="link-login" to="/post/gerenciar"> <div class="admin-button">admin</div> </router-link>
         </div>
         <div class="credits">
-            <img class="logo-footer" src="./../assets/logo-footer2.png">
+            <router-link class="link-login" to="/login"> <img class="logo-footer" src="./../assets/logo-footer2.png"> </router-link>
         </div> 
       </div>
   </div>
@@ -89,7 +90,6 @@ export default {
 .admin-button {
     margin-top: 10px;
     cursor: pointer;
-    margin-left: 0.6vw;
 }
 .div-footer-left {
     display: flex;
@@ -97,7 +97,6 @@ export default {
 .news {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     margin-top: 4%;
 }

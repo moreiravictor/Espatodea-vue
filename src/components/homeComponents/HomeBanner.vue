@@ -5,13 +5,9 @@
             <div class="banner-espatodea-text">Espatodea</div>
             <div class="banner-text">
                 <p class="banner-text-bigger">
-                    Somos um casal que teve uma ideia a partir de um incômodo. Mas qual o incômodo? 
-                    Bem... Você sabe plantar o que come? Você sabe reciclar o lixo que produz? Sequer 
-                    sabe para onde vai o que não usa mais? Provavelmente não. E isso acontece porque há 
-                    séculos estamos vivendo em uma dependência criada por uma relação de tutoria exercida 
-                    pelo Estado em conjunto com grandes corporações, em que o indivíduo ou comunidades 
-                    menores (como a família) acabaram por perder, com o tempo, sua autonomia dentro da 
-                    produção daquilo que serve para satisfazer até mesmo suas necessidades mais fundamentais. 
+                    Acreditamos que se cada um fizer um pouquinho, conseguimos construir um mundo melhor. 
+                    Por isso criamos a Espatódea, e aqui você vai aprender de forma simples o que está acontecendo com o nosso planeta, 
+                    como podemos mudar isso e a importância de cada um nesse processo.
                 </p>
             </div>
         </div>
@@ -35,14 +31,12 @@ export default {
 .banner-img-out {
     display: flex;
     justify-content: center;
-    padding-left: 6%;
-    padding-right: 6%;
-    /* height: 80%; */
-    width: 45%;
+    padding: 2%;
+    width: 25%;
 }
 .line-between {
     width: 2px;
-    height: 22vh;
+    height: 10vw;
     background-color: #406652;
     display: block;
 }
@@ -55,7 +49,7 @@ export default {
 .banner-text {
     color: #406652;
     font-family: "Quicksand Light";
-    font-size: 24px;
+    font-size: 2vw;
     padding: 2% 3% 3% 3%;
     padding-right: 10%;
 }
