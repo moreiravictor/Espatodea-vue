@@ -2,17 +2,14 @@
   <div class="footer-outter">
       <div class="footer-inner">
         <div class="espatodea">
-            Espatodea
-        <div class="turtle">
-            <img class="img-turtle" src="./../assets/turtle.png"/>
-        </div>
-        <div class="div-footer-left">
-            <router-link class="link-login" to="/login"> <div class="login-button">login</div> </router-link>
-            <router-link v-if="user !==0" class="link-login" to="/post/gerenciar"> <div class="admin-button">admin</div> </router-link>
-        </div>
+            <div class="icon-div"><font-awesome-icon class="credits-icon" :icon="['fas', 'flask']" /></div>
+            <div class="credits-text">
+                <div>Developed by Victor Moreira</div>
+                <div>Designed by Beatriz Vitor</div>
+            </div>
         </div>
         <div class="news">
-            <div class="news-text">Inscreva-se para receber os novos posts:</div>
+            <div class="news-text">Quer receber nosso newsletter?</div>
             <div class="news-field-outter">
                 <div class="news-field">
                     <label>Nome:</label>
@@ -29,11 +26,7 @@
             </div>
         </div>
         <div class="credits">
-            <font-awesome-icon class="credits-icon" :icon="['fas', 'flask']" />
-            <div class="credits-text">
-                <div>Developed by Victor Moreira</div>
-                <div>Designed by Beatriz Vitor</div>
-            </div>
+            <img class="logo-footer" src="./../assets/logo-footer2.png">
         </div> 
       </div>
   </div>
@@ -55,22 +48,26 @@ export default {
     align-items: center;
     margin-top: 2%;
     width: 100%;
-    height: 150px;
-    background-color: #F3B69B;
     color: white;
     font-family: Quicksand Light;
+    background-image: url('./../assets/footer.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 .footer-inner {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-left:2%;
     padding-right: 4%;
+    padding-top: 10%;
 }
 .espatodea {
-    font-size: 34px;
-    padding-top: 2.2%;
+    margin-top: 4%;
+    display: flex;
+    align-items: center;
 }
 .turtle {
     height: 30px;
@@ -102,6 +99,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 4%;
 }
 .news-text {
     font-size: 22px;
@@ -152,12 +150,18 @@ export default {
 }
 .credits-icon {
     padding-right: 8px;
-    font-size: 20px;
+    font-size: 1.4vw;
 }
 .credits-text {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size:1.1vw;
+}
+.logo-footer {
+    width: 50%;
+    margin-left: 15%;
+    padding-bottom: 25%;
 }
 
 
@@ -165,23 +169,87 @@ export default {
   font-family: "Quicksand Light";
   src: url("./../assets/fonts/Quicksand_Light.otf");
 }
-@media(max-width: 947px) {
+
+@media(max-width: 1820px) {
+    .logo-footer {
+        margin-left: 30%;
+    }
+    .news, .espatodea {
+        margin-top: 9%;
+    }
+}
+
+@media(max-width: 1750px) {
+    .news, .espatodea {
+        margin-top: 9%;
+    }
+    .news-button {
+        margin-top: 6%;
+    }
+}
+
+@media(max-width: 1440px) {
+    .logo-footer {
+        margin-left: 35%;
+        padding-bottom: 10%;
+    }
+    .news, .espatodea {
+        margin-top: 8%;
+    }
     .news {
-        padding: 2%;
+        margin-left: 10%;
+    }
+}
+
+@media(max-width: 1196px) {
+    .espatodea {
+        flex-direction: column;
+        margin-left: 2%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+    }
+    .news-button {
+        font-size: 1vh;
+        margin-top: 7%;
+    }
+}
+
+@media(max-width: 1007px) {
+    .espatodea {
+        width: 22%;
     }
     .news-text {
-        font-size: 16px;
+        margin-bottom: 8px;
+        font-size: 18px;
     }
     .news-button {
         width: 12%;
         height: 40%;
-        margin-top: 7%;
+        margin-top: 8%;
+    }
+    .news-button-text {
+        display: none;
+    }
+}
+
+@media(max-width: 960px) {
+    .news {
+        padding: 2%;
+    }
+    .news-text {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    .news-button {
+        margin-top: 9%;
     }
     .button-icon {
         padding: 0px;
     }
-    .news-button-text {
-        display: none;
+    .input-footer {
+        width: 100%;
     }
     .credits {
         flex-direction: column;
@@ -193,44 +261,105 @@ export default {
     .credits-text {
         font-size: 9px;
     }
+
+    .espatodea {
+        margin-top: 10%;
+        width: 30%;
+    }
+    .credits-text {
+        font-size: 12px;
+    }
 }
+
+@media(max-width: 861px) {
+    .espatodea {
+        width: 30%;
+    }
+    .credits-text {
+        font-size: 10px;
+    }
+    .news {
+        margin-left: 5%;
+    }
+    .news-text, .news-field {
+        font-size: 14px;
+    }
+    .input-footer {
+        width: 100%;
+    }
+
+}
+
 @media(max-width: 759px) {
     .espatodea {
         font-size: 18px;
     }
 }
 @media(max-width: 665px) {
-        .credits {
-        display: none;
+        .espatodea {
+            display: none;
+    }
+    .news {
+        padding-top: 11%;
+    }
+}
+
+@media(max-width: 516px) {
+    .news {
+        width: 100%;
+        margin-left: 2%;
+    }
+    .news-button {
+        margin-top: 11%;
     }
 }
 @media(max-width: 463px) {
     .news {
-        padding-top: 0;
-        padding-bottom: 0;
-            padding-left: 22px;
+        width: 140%;
+    }
+}
+@media(max-width: 417px) {
+    .news {
+        width: 200%;
     }
     .news-text {
-        margin-bottom: 0px;
-        text-align: center;
-    }
-    .news-field-outter {
-        flex-direction: column;
-        align-items: center;
+        font-size: 10px;
     }
     .news-field {
-        font-size: 12px;
-        margin-right: 0;
-        text-align: center;
-        align-items: center;
-    }
-    .input-footer {
-        width: 80%;
-        margin-top: 0;
+        font-size: 10px;
     }
     .news-button {
-        margin: 0;
-        margin-top: 5px;
+        margin-top: 6%;
+    }
+    .input-footer {
+        height: 9px;
+    }
+    .button-icon {
+        font-size: 10px;
+    }
+}
+
+@media(max-width: 408px) {
+    .news-button {
+        margin-top: 8%;
+    }
+}
+
+@media(max-width: 328px) {
+    .news-text {
+        font-size: 8px;
+        margin-bottom: 1px;
+    }
+    .news-field {
+        font-size: 8px;
+    }
+}
+@media(max-width: 282px) {
+    .news-text, .news-field {
+        font-size: 7px;
+    }
+    .input-footer {
+        height: 4px;
     }
 }
 </style>
