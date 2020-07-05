@@ -1,13 +1,13 @@
 <template>
   <carousel 
-        :paginationEnabled="true" :paginationActiveColor="'#F3B69B'" 
-        :paginationPosition="'bottom-overlay'" :paginationColor="'rgba(243, 182, 155, .4)'" 
+        :paginationEnabled="true" :paginationActiveColor="'#406652'" 
+        :paginationPosition="'bottom-overlay'" :paginationColor="'rgba(300, 300, 300, 1)'" 
         :autoplay=true :autoplayTimeout=4000
         :centerMode=true :perPage="1" :loop=true 
         :scrollPerPage="true" :speed=2000>
-            <slide><img src="./../../assets/turtle2.jpg" class="carousel-img"/></slide>
-            <slide><img src="./../../assets/coral.jpg" class="carousel-img"/></slide>
-            <slide><img src="./../../assets/beauty.jpg" class="carousel-img"/></slide>
+            <slide><img src="./../../assets/banner1.png" class="carousel-img"/></slide>
+            <slide><img src="./../../assets/banner2.png" class="carousel-img"/></slide>
+            <slide><img src="./../../assets/banner3.png" class="carousel-img"/></slide>
     </carousel>
 </template>
 

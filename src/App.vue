@@ -31,4 +31,8 @@ body {
   margin: 0;
   padding: 0;
 }
+@font-face {
+  font-family: "Quicksand Light";
+  src: url("./assets/fonts/Quicksand_Light.otf");
+}
 </style>
