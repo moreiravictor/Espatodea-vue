@@ -74,13 +74,14 @@ export default {
         async sendPost(model) {
             this.checkSelectedCategories();
             if (typeof model.post_id === 'undefined') {
-                let response = await postCaller.publishPosts(model);
-                this.$alert(response.data.data.title, 'Postado!', 'success').then(() => location.reload());
+                postCaller.publishPosts(model).then(res => {
+                    this.$alert(res.data.data.title, 'Postado!', 'success').then(() => location.reload());
+                });
             } else {
-                let response = await postCaller.patchPost(model, model.post_id);
-                this.$alert(response.data.data.title, 'Atualizado!', 'success').then(() => location.reload());
+                postCaller.patchPost(model, model.post_id).then(res => {
+                    this.$alert(res.data.data.title, 'Atualizado!', 'success').then(() => location.reload());
+                });
             }
-            this.postModel = {};
         },
         checkSelectedCategories() {
             this.postModel.post_categories = [];
