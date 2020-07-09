@@ -96,8 +96,10 @@ export default {
   text-align: center;
   color: #000;
 }
+
 .post-item-image {
-  width:100%;
+  width: 20.5vw;
+  height: 20.5vw;
 }
 .post-item-date {
   font-size: 1.2vw;
@@ -114,7 +116,11 @@ export default {
   }
   .post-item-title, .post-item-date {
     font-size: 3vw;
-}
+  }
+  .post-item-image {
+    width: 35vw;
+    height: 35vw;
+  }
 }
 @media(max-width: 520px) {
   .post-item {
@@ -122,6 +128,10 @@ export default {
   }
   .post-item-title, .post-item-date {
     font-size: 4vw;
-}
+  }
+  .post-item-image {
+    width: 60vw;
+    height: 60vw;
+  }
 }
 </style>

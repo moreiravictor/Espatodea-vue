@@ -26,23 +26,23 @@ export default {
     return {
       items: [
         {
-          image:"destaque1",
-          title: "Dicas de alimentação",
-          text: "Mês passado meu celular parou de pegar, então eu comprei um novo.",
+          image:"destaque1.png",
+          title: "Dicas Práticas",
+          text: "Para aprender a mudar além da teoria.",
           buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
-          image:"destaque2",
-          title: "Nossos projetos",
-          text: "Quando se fala de sustentabilidade logo pensamos em reciclagem e replantar árvores.",
+          image:"destaque2.png",
+          title: "E-Books e Materiais",
+          text: "Pra você aprender ainda mais e ajudar o planeta todos os dias.",
           buttonText: "Entenda!",
           route: "/post/gallery/all"
         },
         {
-          image:"destaque3",
-          title: "Meio ambiente",
-          text: "Muito se fala sobre energias renováveis e sua importância não só para o meio-ambiente.",
+          image:"destaque3.png",
+          title: "Sobrecarga da Terra",
+          text: "Há anos estamos gastando o que a Terra já não pode repor.",
           buttonText: "Entenda!",
           route: "/post/gallery/all"
         }
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     imagePath(image) {
-      return require('./../../assets/' + image +'.png')
+      return require('./../../assets/' + image)
     }
   }
 
@@ -77,7 +77,7 @@ export default {
 }
 .item-img {
   position: relative;
-  height: 100%;
+  height: 36.7vw;
 }
 .img-in {
   opacity: 1;
