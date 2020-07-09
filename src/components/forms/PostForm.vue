@@ -33,10 +33,13 @@
       </form>
       <div class="imgur-authorizatiom">
           <div class="combo-field">
-                        <label class="label-post">Imagem do post</label>
-                        <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
-                        <button type="button" style="margin-top:10px" class="button-selection" @click="sendImageToImgur()">enviar imagem</button>
-                    </div>
+                <label class="label-post">Imagem do post</label>
+                <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
+            </div>
+            <div>
+                <label class="label-post">Data do post</label>
+                <input v-model="postModel.post_date" type="date" required> 
+            </div>
       </div>
   </div>
 </template>
@@ -103,6 +106,7 @@ export default {
         },
         onImageSelected(event) {
             this.selectedImage = event.target.files[0];
+            this.sendImageToImgur();
         },
         sendImageToImgur() {
             if (this.selectedImage != null && this.$route.params.acces_token) {
@@ -112,9 +116,11 @@ export default {
                     .then(res => {
                         this.postModel.post_image_path = res.data.data.link;
                         this.$alert('Imagem enviada!', 'Sucesso', 'success');
-                        });
-            } else {
+                        }).catch((err) => this.$alert(`Erro ao fazer upload para o Imgur:\n${err}`, 'Erro', 'error'));
+            } else if(this.selectedImage == null) {
                 this.$alert('Você precisa selecionar uma imagem', 'Erro', 'error');
+            } else {
+                this.$alert('Você precisa logar no Imgur Novamente', 'Erro', 'error');
             }
         }
     }

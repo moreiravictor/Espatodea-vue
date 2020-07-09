@@ -5,9 +5,21 @@
         :autoplay=true :autoplayTimeout=4000
         :centerMode=true :perPage="1" :loop=true 
         :scrollPerPage="true" :speed=2000>
-            <slide><img src="./../../assets/banner1.png" class="carousel-img"/></slide>
-            <slide><img src="./../../assets/banner2.png" class="carousel-img"/></slide>
-            <slide><img src="./../../assets/banner3.png" class="carousel-img"/></slide>
+            <slide>
+              <router-link to="/"> 
+                <img src="./../../assets/banner1.png" class="carousel-img"/> 
+              </router-link>
+            </slide>
+            <slide>
+              <router-link to="/post/see/6">
+                <img src="./../../assets/banner2.png" class="carousel-img"/> 
+              </router-link>
+            </slide>
+            <slide>
+              <router-link to="/"> 
+                <img src="./../../assets/banner3.png" class="carousel-img"/>
+              </router-link>  
+              </slide>
     </carousel>
 </template>
 

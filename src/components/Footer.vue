@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="news">
-            <div class="news-text">Quer receber nosso newsletter?</div>
+            <div class="news-text">Quer receber nossa newsletter?</div>
             <div class="news-field-outter">
                 <div class="news-field">
                     <label>Nome:</label>
