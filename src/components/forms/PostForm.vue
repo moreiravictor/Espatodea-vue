@@ -27,15 +27,15 @@
                     <textarea class="content" v-model="postModel.post_content" placeholder="digite o post" required></textarea>
                   </div>
               </div>
-            <button class="button" @click="sendPost(postModel)">{{(typeof postModel.post_id === 'undefined')? 'Postar' : 'Editar'}}</button>
-            <button class="button" @click="postModel = {}">Resetar</button>
+            <button type="button" class="button" @click="sendPost(postModel)">{{(typeof postModel.post_id === 'undefined')? 'Postar' : 'Editar'}}</button>
+            <button type="button" class="button" @click="postModel = {}">Resetar</button>
           </div>
       </form>
       <div class="imgur-authorizatiom">
           <div class="combo-field">
                         <label class="label-post">Imagem do post</label>
                         <input style="margin-top:10px" type="file" @change="onImageSelected" placeholder="imagem do post" required> 
-                        <button style="margin-top:10px" class="button-selection" @click="sendImageToImgur()">enviar imagem</button>
+                        <button type="button" style="margin-top:10px" class="button-selection" @click="sendImageToImgur()">enviar imagem</button>
                     </div>
       </div>
   </div>

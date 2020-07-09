@@ -13,7 +13,7 @@
                 <textarea v-model="new_comment.comment_content" class="comment-area"/>
             </div>
             <div class="new-comment-item">
-                <button @click="publishComment(new_comment)" class="button-comment">comentar</button>
+                <button type="button" @click="publishComment(new_comment)" class="button-comment">comentar</button>
             </div>
         </div>
     </div>
@@ -33,11 +33,10 @@ export default {
     methods: {
         publishComment(model) {
             model.post_id = this.post.data.data.post_id;
-            commentCaller.publishComment(model)
-                            .then(res => {
-                                this.post.data.data.comments.push(res.data.data);
-                                this.new_comment = {};
-                                });
+            commentCaller.publishComment(model).then(res => {
+                this.post.data.data.comments.push(res.data.data);
+                this.new_comment = {};
+            });
         }
     }
 }

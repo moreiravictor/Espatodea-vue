@@ -6,8 +6,8 @@
             <input type="text" v-model="user.username"/>
             <label>senha</label>
             <input type="password" v-model="user.password"/>
-            <button @click="login(user)" class="login-button">login</button>
-            <button @click="logout()" class="login-button">logout</button>
+            <button type="button" @click="login(user)" class="login-button">login</button>
+            <button type="button" @click="logout()" class="login-button">logout</button>
         </form>
       </div>
   </div>
