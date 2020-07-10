@@ -63,7 +63,7 @@ export default {
         },
         prepareDate(date) {
             let date_converted = new Date(date);
-            return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
+            return `${date_converted.getUTCDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
         },
         sendPostEdit(post) {
             this.post_to_edit = post;
