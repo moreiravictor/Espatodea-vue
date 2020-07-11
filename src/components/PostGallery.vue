@@ -1,8 +1,15 @@
 <template>
   <div id="post-gallery-outter">
+    <div class="post-gallery-upper">
+      <div class="post-gallery-title">Blog</div>
+      <div class="wrapper" style="position: relative;">
+        <input class="post-gallery-search" placeholder="Buscar post" type="text" v-model="post_title" @keypress.enter="getByTitle(post_title)"/>
+        <font-awesome-icon class="search-icon" :icon="['fa', 'search']" @click="getByTitle(post_title)"/>
+      </div>
+    </div>
     <div class="post-gallery-inner">
       <div v-for="(post, index) in posts_paginated" v-bind:key="index" class="post-item">
-        <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a" href="sei la">
+        <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a">
           <img class="post-item-image" :src="post.post_image_path"/>
           <div class="post-item-date">{{prepareDate(post.post_date)}}</div>
           <div class="post-item-title">{{post.title}}</div>
@@ -27,7 +34,8 @@ export default {
       posts:{},
       posts_data: {},
       posts_paginated: {},
-      qt_page: 9
+      qt_page: 9,
+      post_title: ""
     }
   },
   methods: {
@@ -42,9 +50,15 @@ export default {
         this.posts = res;
         this.posts_data = res.data.data;
       }).catch( () => {
-        this.posts_paginated = {};
-        this.posts_data = {};
         this.$alert('Ainda não temos nenhum post nesta categoria', 'Desculpe-nos', 'warning').then( () => this.$router.push('/'));
+        });
+    },
+    getByTitle(post_title) {
+      postCaller.getByTitle(post_title).then(res => {
+        this.posts = res;
+        this.posts_data = res.data.data;
+      }).catch( () => {
+        this.$alert('Nenhum post com este título', 'Desculpe-nos', 'warning');
         });
     },
     prepareDate(date) {
@@ -54,15 +68,16 @@ export default {
     postsToShow(value) {
       this.posts_paginated = value;
       window.scrollTo(0,0);
+    },
+    choosePostCall() {
+      (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
     }
   },
   mounted () {
-    (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
+    this.choosePostCall();
   },
   watch: {
-    $route: function() {
-      (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
-    }
+    $route: function(){this.choosePostCall()}
   }
 }
 </script>
@@ -76,6 +91,38 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
+}
+.post-gallery-upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 74%;
+}
+.post-gallery-title {
+  font-size: 40px;
+}
+.post-gallery-search {
+  border: 1px solid #F3B69B;
+  color: #F3B69B;
+  border-radius: 10px;
+  height: 20px;
+  width: 100%;
+  background-color:transparent;
+  font-family: 'FontAwesome';
+  padding-left: 0.4vw;
+}
+.post-gallery-search::placeholder {
+  color: #F3B69B;
+}
+.post-gallery-search:focus {
+  outline: none;
+}
+.search-icon {
+  color: #F3B69B; 
+  position: absolute; 
+  right: 0.4vw;
+  top: 0.4vh;
+  cursor: pointer;
 }
 .post-gallery-inner {
   display: flex;
