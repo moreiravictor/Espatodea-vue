@@ -109,7 +109,7 @@ export default {
   width: 100%;
   background-color:transparent;
   font-family: 'FontAwesome';
-  padding-left: 0.4vw;
+  padding-left: 5px;
 }
 .post-gallery-search::placeholder {
   color: #F3B69B;
@@ -121,7 +121,7 @@ export default {
   color: #F3B69B; 
   position: absolute; 
   right: 0.4vw;
-  top: 0.4vh;
+  top: 4px;
   cursor: pointer;
 }
 .post-gallery-inner {
@@ -179,6 +179,12 @@ export default {
   .post-item-image {
     width: 60vw;
     height: 60vw;
+  }
+  .post-gallery-upper {
+    flex-direction: column;
+  }
+  .post-gallery-title {
+    margin-bottom: 5px;
   }
 }
 </style>
