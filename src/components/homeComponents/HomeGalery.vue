@@ -6,7 +6,7 @@
             <img class="img-in" :src="imagePath(item.image)"/>
             <div class="middle">
               <router-link :to="item.route" class="text-router">
-                <div class="img-in-text">Entenda melhor</div>
+                <div class="img-in-text">Saiba mais</div>
               </router-link>
             </div>
           </div>

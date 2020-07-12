@@ -22,7 +22,9 @@ export default {
         PostList
     },
     created: function() {
-        if(!this.$route.params.acces_token && this.user !==0) window.open(this.authLink()).then(window.close());
+        if(!this.$route.params.acces_token && this.user !== 0) {
+            window.location.replace(this.authLink());
+        }
     }
 }
 </script>
