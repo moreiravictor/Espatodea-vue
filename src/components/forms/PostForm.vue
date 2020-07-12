@@ -1,8 +1,8 @@
 <template>
   <div v-if="user !== 0" class="outter-post">
       <div class="outter-selection">
-        <div class="button-selection" @click="showCategories()">Categorias</div>
-        <div class="inner-selection" :style="{display: showCat}">
+        <div class="button-selection">Categorias</div>
+        <div class="inner-selection">
             <div class="selection" v-for="(category, i) in categories" :key="category">
                 <input type="checkbox" :id="i" :value="category" v-model="checked_categories[i]">
                 <label> {{category}} </label>
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <label class="label-post">Data do post</label>
-                <input v-model="postModel.post_date" type="date" required> 
+                <input v-model="post_date" type="date" required> 
             </div>
       </div>
   </div>
@@ -47,32 +47,22 @@
 <script>
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
 import axios from 'axios'
+import { categories } from './../commons/categories'
+import { americanDate } from './../commons/functions'
 const postCaller = RepositoryFactory.get('posts');
 export default {
     props: ['postModel'],
     data() {
         return {
-            categories: {
-                0:  "Meio Ambiente",
-                1:	"Dicas de Meio Ambiente",
-                2:	"Projetos",
-                3:	"Nossos Projetos",
-                4:	"Outros Projetos",
-                5:	"Entretenimento",
-                6:	"Comida",
-                7:	"Dicas de Comida",
-                8:	"Receitas",
-                9: "Entenda mais",
-                10: "Comece aqui"
-            },
+            categories: categories,
             checked_categories: [],
             showCat: "none",
             selectedImage: null,
             acces_token: '',
-            get user() {return localStorage.getItem('user') || 0} 
+            post_date:  americanDate(this.postModel.post_date),
+            get user() {return localStorage.getItem('user') || 0}
         }
     },
-
     methods: {
         async sendPost(model) {
             this.checkSelectedCategories();
@@ -122,6 +112,23 @@ export default {
             } else {
                 this.$alert('Você precisa logar no Imgur Novamente', 'Erro', 'error');
             }
+        },
+        selectategories() {
+            if (this.postModel) {
+                this.checked_categories = [];
+                this.postModel.post_categories.forEach(category => {
+                    this.checked_categories[category.category_id] = true;
+                });
+            }
+        }
+    },
+    mounted() {
+        this.selectategories();
+    },
+    watch: {
+        postModel: function() {
+            this.selectategories();
+            this.post_date = americanDate(this.postModel.post_date);
         }
     }
 }

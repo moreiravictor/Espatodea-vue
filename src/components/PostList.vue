@@ -68,7 +68,7 @@ export default {
         sendPostEdit(post) {
             this.post_to_edit = post;
             this.showPostForm = true;
-            window.scrollTo(0, 999999);
+            window.scrollTo(0, 4000);
         },
         openForm() {
             this.post_to_edit = {};
