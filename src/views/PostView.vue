@@ -1,11 +1,14 @@
 <template>
     <div class="outter-post-view">
         <div class="upper-post">
-            <div class="post-date">
-                {{prepareDate(post_data.post_date)}}
-            </div>
             <div class="post-title">
                 {{post_data.title}}
+            </div>
+            <div class="author-post">
+            Escrito por {{post_data.post_author}}
+            </div>
+            <div class="post-date">
+                {{prepareDate(post_data.post_date)}}
             </div>
             <div class="post-image">
                 <img class="post-image-data" :src="post_data.post_image_path"/>
@@ -15,9 +18,6 @@
             <div v-html="post_data.post_content"></div>
         </div>
         <div class="end-post">
-            <div class="author-post">
-            Escrito por {{post_data.post_author}}
-            </div>
             <div class="comments-post">
                 <div class="comments-title">Comentários</div>
                 <div v-for="(comment, index) in comments_paginated" :key="index" class="comment-item">
@@ -99,16 +99,24 @@ export default {
     width: 50%;
     margin-bottom: 40px;
 }
-.post-date {
-    margin-top: 20px;
-    text-align: center;
-}
+
 .post-title {
     margin-top: 10px;
-    margin-bottom: 30px;
     font-size: 3vw;
     font-weight: bold;
     text-align: center;
+}
+.author-post {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+}
+.post-date {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 30px;
 }
 .post-image {
     width: 100%;
@@ -123,21 +131,15 @@ export default {
     justify-content: center;
     text-align: justify;
     font-size: 30px;
-    line-height: 30px;
+    line-height: 60px;
     margin-bottom: 20px;
 }
 .end-post {
-   width:50%; 
-   display: flex;
-    justify-content: center;
-   flex-direction: column;
-}
-.author-post {
+    width:50%; 
     display: flex;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    font-weight: bold;
+    flex-direction: column;
+    margin-top: 8vw;
 }
 .comments-post {
     margin-top: 2%;
@@ -232,9 +234,21 @@ export default {
     }
 
 }
-@media(max-width: 600px) {
+@media(max-width: 700px) {
     .middle-post {
         font-size: 20px;
+    }
+    .end-post {
+        width: 80%;
+    }
+    .new-comment-title {
+        font-size: 5vw;
+    }
+}
+@media(max-width: 400px) {
+    .middle-post {
+        font-size: 14px;
+        line-height: 30px;
     }
     .end-post {
         width: 80%;
