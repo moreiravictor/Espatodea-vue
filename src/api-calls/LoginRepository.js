@@ -4,6 +4,6 @@ const resource = "/admin";
 
 export default {
     connectAsAdmin(username, password) {
-        return Repository.get(`${resource}/get?username=${username}&password=${password}`);
+        return Repository.get(`${resource}?username=${username}&password=${password}`);
     }
 };
