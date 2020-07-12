@@ -1,7 +1,7 @@
 <template>
   <div id="post-gallery-outter">
     <div class="post-gallery-upper">
-      <div class="post-gallery-title">Blog</div>
+      <div class="post-gallery-title">{{gallery_title}}</div>
       <div class="wrapper" style="position: relative;">
         <input class="post-gallery-search" placeholder="Buscar post" type="text" v-model="post_title" @keypress.enter="getByTitle(post_title)"/>
         <font-awesome-icon class="search-icon" :icon="['fa', 'search']" @click="getByTitle(post_title)"/>
@@ -35,7 +35,8 @@ export default {
       posts_data: {},
       posts_paginated: {},
       qt_page: 9,
-      post_title: ""
+      post_title: "",
+      gallery_title: ''
     }
   },
   methods: {
@@ -71,13 +72,48 @@ export default {
     },
     choosePostCall() {
       (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);
+    },
+    chooseGalleryTitle() {
+      switch(this.$route.params.post_category) {
+        case ('all'): 
+          this.gallery_title = 'Blog';
+          break;
+        case(1):
+          this.gallery_title = 'Comece aqui';
+          break;
+        case(2):
+          this.gallery_title = 'Na prática';
+          break;
+        case(3):
+          this.gallery_title = 'Entenda mais';
+          break;
+        case(4):
+          this.gallery_title = 'Alimentação';
+          break;
+        case(5):
+          this.gallery_title = 'Projetos';
+          break;
+        case(6):
+          this.gallery_title = 'Dicas práticas';
+          break;
+        case(7):
+          this.gallery_title = 'Dicas de alimentação';
+          break;
+        case(8):
+          this.gallery_title = 'Receitas';
+          break;
+      }
     }
   },
   mounted () {
     this.choosePostCall();
+    this.chooseGalleryTitle();
   },
   watch: {
-    $route: function(){this.choosePostCall()}
+    $route: function(){
+      this.choosePostCall();
+      this.chooseGalleryTitle();
+      }
   }
 }
 </script>

@@ -113,7 +113,7 @@ export default {
                 this.$alert('Você precisa logar no Imgur Novamente', 'Erro', 'error');
             }
         },
-        selectategories() {
+        selectCategories() {
             if (this.postModel) {
                 this.checked_categories = [];
                 this.postModel.post_categories.forEach(category => {
@@ -123,11 +123,11 @@ export default {
         }
     },
     mounted() {
-        this.selectategories();
+        this.selectCategories();
     },
     watch: {
         postModel: function() {
-            this.selectategories();
+            this.selectCategories();
             this.post_date = americanDate(this.postModel.post_date);
         }
     }
