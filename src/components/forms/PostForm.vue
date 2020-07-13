@@ -4,7 +4,7 @@
         <div class="button-selection">Categorias</div>
         <div class="inner-selection">
             <div class="selection" v-for="(category, i) in categories" :key="category">
-                <input type="checkbox" :id="i" :value="category" v-model="checked_categories[i]">
+                <input type="checkbox" :id="i" :value="i" v-model="checked_categories">
                 <label> {{category}} </label>
             </div>
         </div>
@@ -28,7 +28,7 @@
                   </div>
               </div>
             <button type="button" class="button" @click="sendPost(postModel)">{{(typeof postModel.post_id === 'undefined')? 'Postar' : 'Editar'}}</button>
-            <button type="button" class="button" @click="postModel = {}">Resetar</button>
+            <button type="button" class="button" @click="postModel = {};checked_categories = []">Resetar</button>
           </div>
       </form>
       <div class="imgur-authorizatiom">
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <label class="label-post">Data do post</label>
-                <input v-model="post_date" type="date" required> 
+                <input v-model="postModel.post_date" type="date" required> 
             </div>
       </div>
   </div>
@@ -59,7 +59,6 @@ export default {
             showCat: "none",
             selectedImage: null,
             acces_token: '',
-            post_date:  americanDate(this.postModel.post_date),
             get user() {return localStorage.getItem('user') || 0}
         }
     },
@@ -78,21 +77,10 @@ export default {
         },
         checkSelectedCategories() {
             this.postModel.post_categories = [];
-            this.postModel.comments = [];
-            this.checked_categories.forEach((cat, index) => {
-                if (cat === true) {
-                    const new_category = {category_id: index};
-                    this.postModel.post_categories.push(new_category);
-                }
+            this.checked_categories.forEach(cat_id => {
+                const new_category = {category_id: cat_id};
+                this.postModel.post_categories.push(new_category);
             });
-        },
-        showCategories() {
-            if (this.showCat == "none") {
-                this.showCat = "flex"; 
-            }
-            else  {
-                this.showCat = "none";  
-            }
         },
         onImageSelected(event) {
             this.selectedImage = event.target.files[0];
@@ -100,13 +88,11 @@ export default {
         },
         sendImageToImgur() {
             if (this.selectedImage != null && this.$route.params.acces_token) {
-                axios.post('https://api.imgur.com/3/image', 
-                    this.selectedImage, {
-                    headers: {Authorization: `Bearer ${this.$route.params.acces_token}`}})
+                axios.post('https://api.imgur.com/3/image', this.selectedImage, {headers: {Authorization: `Bearer ${this.$route.params.acces_token}`}})
                     .then(res => {
                         this.postModel.post_image_path = res.data.data.link;
                         this.$alert('Imagem enviada!', 'Sucesso', 'success');
-                        }).catch((err) => this.$alert(`Erro ao fazer upload para o Imgur:\n${err}`, 'Erro', 'error'));
+                    }).catch(err => this.$alert(`Erro ao fazer upload para o Imgur:\n${err}`, 'Erro', 'error'));
             } else if(this.selectedImage == null) {
                 this.$alert('Você precisa selecionar uma imagem', 'Erro', 'error');
             } else {
@@ -114,10 +100,10 @@ export default {
             }
         },
         selectCategories() {
-            if (this.postModel) {
+            if (this.postModel && this.postModel.post_categories) {
                 this.checked_categories = [];
                 this.postModel.post_categories.forEach(category => {
-                    this.checked_categories[category.category_id] = true;
+                    this.checked_categories.push(category.category_id);
                 });
             }
         }
@@ -128,7 +114,7 @@ export default {
     watch: {
         postModel: function() {
             this.selectCategories();
-            this.post_date = americanDate(this.postModel.post_date);
+            this.postModel.post_date = (this.postModel.post_date) ? americanDate(this.postModel.post_date) : '';
         }
     }
 }
@@ -145,6 +131,9 @@ export default {
 .combo-field {
     display: flex;
     flex-direction: column;
+}
+.edit-text-area {
+    display: flex;
 }
 .combo-field-second {
     display: flex;
