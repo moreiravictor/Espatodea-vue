@@ -1,11 +1,11 @@
 <template>
   <div id="login-outter">
-      <div class="login-inner">
+      <div class="login-inner"> 
         <form class="login-form">
             <label>username</label>
-            <input type="text" v-model="user.username"/>
+            <input type="text" @keypress.enter="login(user)" v-model="user.username"/>
             <label>senha</label>
-            <input type="password" v-model="user.password"/>
+            <input type="password" @keypress.enter="login(user)" v-model="user.password"/>
             <button type="button" @click="login(user)" class="login-button">login</button>
             <button type="button" @click="logout()" class="login-button">logout</button>
         </form>
