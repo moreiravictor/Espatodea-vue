@@ -24,7 +24,7 @@
               <div class="central-fields">
                   <div class="combo-field">
                     <label class="label-post">Conteúdo do post</label>
-                    <textarea class="content" v-model="postModel.post_content" placeholder="digite o post" required></textarea>
+                     <quill-editor v-model="postModel.post_content"/>
                   </div>
               </div>
             <button type="button" class="button" @click="sendPost(postModel)">{{(typeof postModel.post_id === 'undefined')? 'Postar' : 'Editar'}}</button>
