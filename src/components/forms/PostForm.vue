@@ -38,7 +38,7 @@
             </div>
             <div>
                 <label class="label-post">Data do post</label>
-                <input v-model="post_date" type="date" required> 
+                <input v-model="postDate" type="date" required> 
             </div>
       </div>
   </div>
@@ -59,7 +59,7 @@ export default {
             showCat: "none",
             selectedImage: null,
             acces_token: '',
-            post_date: '',
+            postDate: '',
             get user() {return localStorage.getItem('user') || 0}
         }
     },
@@ -111,12 +111,12 @@ export default {
     },
     mounted() {
         this.selectCategories();
-        this.post_date = americanDate(this.postModel.post_date);
+        this.postDate = americanDate(this.postModel.postDate);
     },
     watch: {
         postModel: function() {
             this.selectCategories();
-            this.post_date = americanDate(this.postModel.post_date);
+            this.postDate = americanDate(this.postModel.postDate);
         } 
     }
 }

@@ -9,7 +9,7 @@
                 <div class="post-list-item-title">
                 <p class="p-new">{{post.title}}</p>
                 <p class="p-new">{{post.post_author}}</p>
-                <p class="p-new">{{prepareDate(post.post_date)}}</p>
+                <p class="p-new">{{prepareDate(post.postDate)}}</p>
                 </div>
                 <div class="edit-post">
                     <button @click="sendPostEdit(post)" class="button">editar</button>

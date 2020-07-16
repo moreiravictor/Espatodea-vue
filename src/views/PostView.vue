@@ -8,7 +8,7 @@
             Escrito por {{post_data.post_author}}
             </div>
             <div class="post-date">
-                {{prepareDate(post_data.post_date)}}
+                {{prepareDate(post_data.postDate)}}
             </div>
             <div class="post-image">
                 <img class="post-image-data" :src="post_data.post_image_path"/>
