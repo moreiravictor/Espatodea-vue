@@ -6,7 +6,7 @@
         :centerMode=true :perPage="1" :loop=true 
         :scrollPerPage="true" :speed=2000>
             <slide>
-              <router-link to="/"> 
+              <router-link :to="{name:'gallery', params: {post_category: 1}}"> 
                 <img src="./../../assets/banner1.png" class="carousel-img"/> 
               </router-link>
             </slide>
@@ -16,7 +16,7 @@
               </router-link>
             </slide>
             <slide>
-              <router-link to="/"> 
+              <router-link :to="{name:'gallery', params: {post_category: 6}}"> 
                 <img src="./../../assets/banner3.png" class="carousel-img"/>
               </router-link>  
               </slide>
