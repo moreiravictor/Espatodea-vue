@@ -66,6 +66,7 @@ export default {
     methods: {
         async sendPost(model) {
             this.checkSelectedCategories();
+            this.postModel.postDate = this.postDate;
             if (typeof model.post_id === 'undefined') {
                 postCaller.publishPosts(model).then(res => {
                     this.$alert(res.data.data.title, 'Postado!', 'success').then(() => location.reload());
