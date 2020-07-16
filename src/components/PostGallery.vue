@@ -11,7 +11,7 @@
       <div v-for="(post, index) in posts_paginated" v-bind:key="index" class="post-item">
         <router-link :to="{name: 'post', params: {post_id: post.post_id}}" class="post-item-a">
           <img class="post-item-image" :src="post.post_image_path"/>
-          <div class="post-item-date">{{prepareDate(post.post_date)}}</div>
+          <div class="post-item-date">{{prepareDate(post.postDate)}}</div>
           <div class="post-item-title">{{post.title}}</div>
         </router-link>
       </div>
