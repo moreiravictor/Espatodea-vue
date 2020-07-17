@@ -21,7 +21,7 @@ export default {
     getById(id) {
         return Repository.get(`${resource}/${id}`)
     },
-    getByCategory(category_id) {
-        return Repository.get(`${resource}/category/${category_id}`)
+    getByCategory(category_id, page_size, page) {
+        return Repository.get(`${resource}/category/${category_id}?page=${page}&size=${page_size}`)
     }
 };

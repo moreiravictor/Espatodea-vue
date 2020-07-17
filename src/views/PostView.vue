@@ -17,6 +17,7 @@
         <div class="middle-post">
             <div v-html="post_data.post_content"></div>
         </div>
+        <PostsRelacionados :post_categories="post_data.post_categories"></PostsRelacionados>
         <div class="end-post">
             <div class="comments-post">
                 <div class="comments-title">Comentários</div>
@@ -41,12 +42,14 @@
 import { RepositoryFactory } from './../api-calls/RepositoryFactory';
 import CommentForm from './../components/forms/CommentForm'
 import Pagination from './../components/Pagination'
+import PostsRelacionados from './../components/PostsRelacionados'
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
     components: {
         CommentForm,
-        Pagination
+        Pagination,
+        PostsRelacionados
     },
     data () {
         return {
@@ -123,6 +126,9 @@ export default {
     display: flex;
     justify-content: center;
 }
+.post-image-data {
+    max-width: 100%;
+}
 .middle-post {
     display: flex;
     flex-direction: column;
@@ -139,7 +145,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 8vw;
+    margin-top: 2vw;
 }
 .comments-post {
     margin-top: 2%;
