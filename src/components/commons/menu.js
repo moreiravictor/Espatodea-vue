@@ -17,6 +17,10 @@ export const Menu = [
         post_category: 5
       },
       {
+        title: "plantar",
+        post_category: 9
+      },
+      {
         title: "dicas práticas",
         post_category: 6
       },
