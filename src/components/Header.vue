@@ -368,9 +368,4 @@ export default {
     font-size: 36px;
   }
 }
-@media(max-width: 439px) {
-  .mobile-submenu-icon {
-  font-size:1.2vh;
-}
-}
 </style>
