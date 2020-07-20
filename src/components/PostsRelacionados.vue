@@ -3,9 +3,10 @@
         <div class="relacionados-upper-line"> </div>
         <div class="relacionados-upper">Posts relacionados</div>
         <div class="relacionados-inner">
-            <div v-for="post in posts_relacionados" v-bind:key="post.post_id" class="relacionados-item">
-                <img class="relacionados-item-img" :src="post.post_image_path"/>
-                <div class="relacionados-item-title">{{ post.title | textSize }}</div>
+            <div v-for="post in posts_exibidos" v-bind:key="post.post_id" class="relacionados-item">
+                <router-link :to="{name: 'post', params: {post_id: post.post_id}}">
+                    <img class="relacionados-item-img" :src="post.post_image_path"/>
+                </router-link>
             </div>
         </div>
         <div class="relacionados-under-line"> </div>
@@ -22,6 +23,7 @@ export default {
     data() {
         return {
             posts_relacionados: [],
+            posts_exibidos: [],
             window_width: window.innerWidth,
             qtd_posts: 5
         }
@@ -30,14 +32,17 @@ export default {
         getPostsRelacionados(category_id) {
             postCaller.getByCategory(category_id, this.qtd_posts).then(res => {
                 this.posts_relacionados = res.data.data;
+                this.posts_exibidos = this.posts_relacionados;
+                this.onResize();
             });
-        }
-    },
-    filters: {
-        textSize: function(value) {
-            if  (!value) return '';
-            value = value.toString();
-            return (value.length >= 30) ?  value.slice(0, 30).concat("...") : value;
+        },
+        onResize() {
+            this.window_width = window.innerWidth;
+            if(this.window_width >= 1250) {
+                this.posts_exibidos = this.posts_relacionados;
+            } else {
+                this.posts_exibidos = this.posts_relacionados.slice(0, 3);
+            }
         }
     },
     mounted() {
@@ -45,9 +50,10 @@ export default {
             let most_related_category = getMostRelatedCategory(this.post_categories);
             this.getPostsRelacionados(most_related_category);
         }
-        if (this.window_width < 1250) {
-            this.qtd_posts = 3;
-        }
+        window.addEventListener('resize', this.onResize);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize);
     },
     watch: {
         post_categories: {
@@ -98,22 +104,6 @@ export default {
     height:100%;
     border-radius: 2000px;
 }
-.relacionados-item-title {
-    margin-top: 3vw;
-    width: 9%;
-    text-align: center;
-    transition: 1s ease;
-    opacity: 0;
-    position: absolute;
-    color: black;
-    font-weight: bolder;
-    font-size: 20px;
-    word-wrap: break-word;
-}
-.relacionados-item:hover .relacionados-item-title {
-    opacity: 1;
-    cursor: pointer;
-}
 .relacionados-item:hover .relacionados-item-img  {
     opacity: 0.3;
     cursor: pointer;
@@ -130,9 +120,9 @@ export default {
     width: 20%;
     height: 1px;
 }
-@media(max-width: 1000px) {
-    .relacionados-item-title {
-        display: none;
+@media(max-width: 600px) {
+    .relacionados-inner {
+        width: 90%;
     }
 }
 </style>

@@ -252,7 +252,7 @@ export default {
   animation-duration: 1s;
 }
 .mobile-submenu-icon {
-  font-size:2vh;
+  font-size:5vw;
   line-height:2vh;
   padding-bottom: 0.8vh;
   margin-left:0.5vw;
@@ -274,17 +274,17 @@ export default {
   cursor: pointer;
 }
 .mobile-li-outter {
-  font-size: 4vw;
+  font-size: 10vw;
   margin-bottom: 1vh;
 }
 .mobile-li-inner {
-    font-size: 2.5vw;
+    font-size: 8vw;
     margin-bottom: 1vh;
     text-align: left;
     text-decoration: none;
 }
 .mobile-li-inner-inner {
-    font-size: 2.5vw;
+    font-size: 8vw;
     margin-bottom: 1vh;
     text-align: left;
 }
