@@ -68,7 +68,7 @@ export default {
     },
     postsToShow(value) {
       this.posts_paginated = value;
-      window.scrollTo(0,0);
+      window.scroll({top: 0, left: 0, behavior: 'smooth'});
     },
     choosePostCall() {
       (this.$route.params.post_category === 'all') ? this.getAllPosts() : this.getByCategory(this.$route.params.post_category);

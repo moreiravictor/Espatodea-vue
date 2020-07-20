@@ -77,12 +77,18 @@ export default {
             this.comments_paginated = value;
         },
         scrollToTop() {
-            window.scrollTo(0,0);
+            window.scroll({top: 0, left: 0, behavior: 'smooth'});
         }
     },
     mounted() {
         this.getPostById(this.$route.params.post_id);
         this.scrollToTop();
+    },
+    watch: {
+        $route: function() {
+            this.getPostById(this.$route.params.post_id);
+            this.scrollToTop();
+        }
     }
 }
 </script>
@@ -139,6 +145,7 @@ export default {
     font-size: 30px;
     line-height: 60px;
     margin-bottom: 20px;
+    font-family: Arial;
 }
 .end-post {
     width:50%; 
@@ -222,11 +229,6 @@ export default {
     border: 0.1px solid #fff;
     cursor: pointer;
     background-color: #F3B69B;
-}
-
-@font-face {
-  font-family: "Quicksand Light";
-  src: url("./../assets/fonts/Quicksand_Light.otf");
 }
 @media(max-width: 1344px) {
     .middle-post {
