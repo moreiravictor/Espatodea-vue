@@ -48,7 +48,7 @@ export default {
     methods: {
         subscribeToNewsLetter() {
             if (!this.name || !this.email) {
-                this.$alert('É necessário preencher todos os campos', 'Hey!', 'warning');
+                return this.$alert('É necessário preencher todos os campos', 'Hey!', 'warning');
             }
             newsCaller.subscribeToNewsletter(this.name, this.email)
                 .then(this.$alert('Inscrito(a) com sucesso', 'Hey!', 'success'))
