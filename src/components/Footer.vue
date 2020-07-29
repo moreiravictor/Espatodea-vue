@@ -13,13 +13,13 @@
             <div class="news-field-outter">
                 <div class="news-field">
                     <label>Nome:</label>
-                    <input class="input-footer" type="text"/>
+                    <input v-model="name" class="input-footer" type="text"/>
                 </div>
                 <div class="news-field">
                     <label>E-mail:</label>
-                    <input class="input-footer" type="text"/>
+                    <input v-model="email" class="input-footer" type="text"/>
                 </div>
-                <button class="news-button">
+                <button @click="subscribeToNewsLetter()" class="news-button">
                     <font-awesome-icon class="button-icon" :icon="['fas', 'pencil-alt']" />
                     <div class="news-button-text">inscreva-se</div>
                 </button>
@@ -34,10 +34,26 @@
 </template>
 
 <script>
+import { RepositoryFactory } from './../api-calls/RepositoryFactory'
+const newsCaller =  RepositoryFactory.get('news');
+
 export default {
     data() {
         return {
-            get user() {return localStorage.getItem('user') || 0}
+            get user() {return localStorage.getItem('user') || 0},
+            email: '',
+            name:''
+        }
+    },
+    methods: {
+        subscribeToNewsLetter() {
+            if (!this.name || !this.email) {
+                this.$alert('É necessário preencher todos os campos', 'Hey!', 'warning');
+            }
+            newsCaller.subscribeToNewsletter(this.name, this.email)
+                .then(this.$alert('Inscrito(a) com sucesso', 'Hey!', 'success'))
+                .catch(this.$alert('Algo deu errado com sua inscrição, tente novamente mais tarde', 'Hey!', 'warning'));
+            
         }
     }
 }
