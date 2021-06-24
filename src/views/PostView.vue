@@ -142,9 +142,9 @@ export default {
     align-items: center;
     justify-content: center;
     text-align: justify;
-    font-size: 30px;
-    line-height: 60px;
-    margin-bottom: 20px;
+    font-size: 1.2vw;
+    line-height: 1.6vw;
+    margin-bottom: 1.4vw;
     font-family: Arial;
 }
 .end-post {
@@ -244,7 +244,8 @@ export default {
 }
 @media(max-width: 700px) {
     .middle-post {
-        font-size: 20px;
+        font-size: 2vw;
+        line-height: 2.5vw;
     }
     .end-post {
         width: 80%;

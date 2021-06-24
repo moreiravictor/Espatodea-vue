@@ -9,12 +9,12 @@
 
 <script>
 import HomeGalery from './../components/homeComponents/HomeGalery'
-import HomeBanner from './../components/homeComponents/HomeBanner'
+// import HomeBanner from './../components/homeComponents/HomeBanner'
 import HomeCarousel from './../components/homeComponents/HomeCarousel'
 export default {
     components: {
         HomeGalery,
-        HomeBanner,
+        // HomeBanner,
         HomeCarousel
     },
 }

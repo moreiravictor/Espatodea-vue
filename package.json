@@ -18,9 +18,11 @@
     "save": "^2.4.0",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
+    "vue-material": "^1.0.0-beta-15",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.6",
-    "vue-simple-alert": "^1.1.1"
+    "vue-simple-alert": "^1.1.1",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",

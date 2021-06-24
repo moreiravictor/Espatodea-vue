@@ -1,42 +1,75 @@
 <template>
-    <div class="new-comment-outter">
-        <div class="new-comment">
-            <div class="new-comment-title">
-                Digite um novo comentário!
-            </div>
-            <div class="new-comment-item">
-                <label class="comment-label">autor:</label>
-                <input v-model="new_comment.comment_author"/>
-            </div>
-            <div class="new-comment-item">
-                <label class="comment-label">comentário:</label>
-                <textarea v-model="new_comment.comment_content" class="comment-area"/>
-            </div>
-            <div class="new-comment-item">
-                <button type="button" @click="publishComment(new_comment)" class="button-comment">comentar</button>
-            </div>
-        </div>
+    <div>
+      <form novalidate class="md-layout" @submit.prevent="validateComment">
+        <md-field :class="getValidationClass('comment_author')">
+          <label>Autor</label>
+          <md-input v-model="new_comment.comment_author" required></md-input>
+          <span class="md-error">Quem é você?</span>
+        </md-field>
+
+        <md-field :class="getValidationClass('comment_content')">
+          <label>Diga-nos o que achou!</label>
+          <md-textarea v-model="new_comment.comment_content"></md-textarea>
+        </md-field>
+
+        <md-card-actions>
+          <md-button type="submit" class="md-raised">Comentar</md-button>
+        </md-card-actions>
+        </form>
     </div>
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
 import { RepositoryFactory } from './../../api-calls/RepositoryFactory';
 const commentCaller = RepositoryFactory.get('comments');
 
 export default {
     data() {
         return {
-            new_comment: {}
+            new_comment: {
+              comment_author:  null,
+              comment_content: null
+            }
         }
+    },
+    validations: {
+      new_comment: {
+        comment_author: {
+          required,
+        },
+        comment_content: {
+          required,
+        }
+      }
     },
     props: ['post'],
     methods: {
+        getValidationClass(fieldName) {
+          const field = this.$v.new_comment[fieldName]
+
+          if (field) {
+            return {
+              'md-invalid': field.$invalid && field.$dirty
+            }
+          }
+        },
+        clearForm () {
+          this.$v.$reset()
+          this.new_comment.comment_content = null
+          this.new_comment.comment_author = null
+        },
         publishComment(model) {
             model.post_id = this.post.data.data.post_id;
             commentCaller.publishComment(model).then(res => {
                 this.post.data.data.comments.push(res.data.data);
                 this.new_comment = {};
             });
+        },
+        validateComment() {
+          this.$v.$touch();
+          if (!this.$v.$invalid)
+          this.publishComment(this.new_comment);
         }
     }
 }

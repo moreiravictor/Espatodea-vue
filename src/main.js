@@ -10,6 +10,10 @@ import VueSimpleAlert from "vue-simple-alert";
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css' 
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+import Vuelidate from 'vuelidate'
 
 Vue.use(VueSimpleAlert);
 Vue.use(VueQuillEditor,  { 
@@ -27,6 +31,8 @@ Vue.use(VueQuillEditor,  {
     }
   }
 });
+Vue.use(VueMaterial)
+Vue.use(Vuelidate)
 library.add(fab)
 library.add(fas)
 library.add(faFontAwesome)
