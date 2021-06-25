@@ -1,11 +1,21 @@
 <template>
   <div id="pagination-outter">
-      <div class="pagination-inner">
-            <div @click="getPaginatedData(1)" class="pagination-button"> &lt;&lt;  </div>
-            <div @click="getPaginatedData(number)" class="pagination-button" v-for="number in qt_buttons" v-bind:key="number">
-              {{number}}
+      <div class="centralized">
+            <div @click="getPaginatedData(1)" class="pagination-button"> 
+              <md-button class="md-fab md-mini" id="pag-button">
+                &lt; 
+              </md-button>
             </div>
-            <div @click= "getPaginatedData(qt_buttons)" class="pagination-button"> &gt;&gt; </div>
+            <div @click="getPaginatedData(number)" class="pagination-button" v-for="number in qt_buttons" v-bind:key="number">
+              <md-button class="md-fab md-mini" id="pag-button">
+                {{number}}
+                </md-button>
+            </div>
+            <div @click= "getPaginatedData(qt_buttons)" class="pagination-button">
+              <md-button class="md-fab md-mini" id="pag-button">
+                &gt; 
+              </md-button>
+            </div>
       </div>
   </div>
 </template>
@@ -38,13 +48,22 @@ export default {
 </script>
 
 <style>
-.pagination-inner {
-    display: flex;
+#pagination-outter {
+  margin: 1vw;
 }
 .pagination-button {
     cursor:pointer;
     margin: 5px;
     color: #000;
     font-size: 18px;
+}
+.centralized {
+  display: flex;
+  justify-content:center;
+  align-items:center
+}
+#pag-button {
+  color: black;
+  background: rgba(238, 237, 237, 0.281);
 }
 </style>

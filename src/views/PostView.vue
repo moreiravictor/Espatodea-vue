@@ -19,21 +19,9 @@
         </div>
         <PostsRelacionados :post_categories="post_data.post_categories"></PostsRelacionados>
         <div class="end-post">
-            <div class="comments-post">
-                <div class="comments-title">Comentários</div>
-                <div v-for="(comment, index) in comments_paginated" :key="index" class="comment-item">
-                    <div class="comment-author">
-                        <div class="author-label">autor: .</div> {{comment.comment_author}}
-                    </div>
-                    <div class="comment-content" v-html="comment.comment_content">
-                    </div>
-                    <div class="comment-date">
-                        {{prepareDate(comment.comment_date)}}
-                    </div>
-                </div>
-                <Pagination v-on:paginationToParent="commentsToShow" :data_array="post_data.comments" :qt_page="qt_page" />
-            </div>
-                <CommentForm :post="post"/>
+          <Comments :comments="comments_paginated"/>
+          <Pagination v-on:paginationToParent="commentsToShow" :data_array="post_data.comments" :qt_page="qt_page" />
+          <CommentForm :post="post"/>
         </div>
     </div>
 </template>
@@ -41,12 +29,15 @@
 <script>
 import { RepositoryFactory } from './../api-calls/RepositoryFactory';
 import CommentForm from './../components/forms/CommentForm'
+import Comments from '../components/Comments'
 import Pagination from './../components/Pagination'
 import PostsRelacionados from './../components/PostsRelacionados'
+import { prepareDate } from '../utils' 
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
     components: {
+        Comments,
         CommentForm,
         Pagination,
         PostsRelacionados
@@ -69,10 +60,7 @@ export default {
                     this.post.data.data.comments[index].comment_content = comment.comment_content.replace(/\n/g, "<br/>"));
             });
         },
-        prepareDate(date) {
-            let date_converted = new Date(date);
-            return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
-        },
+        prepareDate,
         commentsToShow(value) {
             this.comments_paginated = value;
         },
@@ -153,6 +141,9 @@ export default {
     justify-content: center;
     flex-direction: column;
     margin-top: 2vw;
+}
+.comments-padding {
+  padding: 0.5vw;
 }
 .comments-post {
     margin-top: 2%;

@@ -24,6 +24,7 @@
 import { RepositoryFactory } from './../api-calls/RepositoryFactory'
 import Pagination from './Pagination.vue'
 const postCaller = RepositoryFactory.get('posts');
+import { prepareDate } from '../utils' 
 
 export default {
   components: {
@@ -62,10 +63,7 @@ export default {
         this.$alert('Nenhum post com este título', 'Desculpe-nos', 'warning');
         });
     },
-    prepareDate(date) {
-      let date_converted = new Date(date);
-      return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
-    },
+    prepareDate,
     postsToShow(value) {
       this.posts_paginated = value;
       window.scroll({top: 0, left: 0, behavior: 'smooth'});

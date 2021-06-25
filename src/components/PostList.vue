@@ -25,6 +25,7 @@
 <script>
 import {RepositoryFactory} from './../api-calls/RepositoryFactory'
 import PostForm from './forms/PostForm'
+import { prepareDate } from '../utils' 
 const postCaller = RepositoryFactory.get('posts');
 
 export default {
@@ -61,10 +62,7 @@ export default {
                 }
             });
         },
-        prepareDate(date) {
-            let date_converted = new Date(date);
-            return `${date_converted.getDate()}/${date_converted.getMonth()+1}/${date_converted.getFullYear()}`;
-        },
+        prepareDate,
         sendPostEdit(post) {
             this.post_to_edit = post;
             this.showPostForm = true;

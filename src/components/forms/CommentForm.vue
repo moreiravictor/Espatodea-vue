@@ -1,20 +1,26 @@
 <template>
     <div>
       <form novalidate class="md-layout" @submit.prevent="validateComment">
-        <md-field :class="getValidationClass('comment_author')">
-          <label>Autor</label>
-          <md-input v-model="new_comment.comment_author" required></md-input>
-          <span class="md-error">Quem é você?</span>
-        </md-field>
+        <md-card class="md-layout-item  md-small-size-100">
+              <md-toolbar class="md-transparent" md-elevation="1">
+                <span class="md-title">Comente</span>
+              </md-toolbar>
+          <md-card-content>
+            <md-field :class="getValidationClass('comment_author')">
+              <label>Autor</label>
+              <md-input v-model="new_comment.comment_author" required></md-input>
+              <span class="md-error">Quem é você?</span>
+            </md-field>
 
-        <md-field :class="getValidationClass('comment_content')">
-          <label>Diga-nos o que achou!</label>
-          <md-textarea v-model="new_comment.comment_content"></md-textarea>
-        </md-field>
-
-        <md-card-actions>
-          <md-button type="submit" class="md-raised">Comentar</md-button>
-        </md-card-actions>
+            <md-field :class="getValidationClass('comment_content')">
+              <label>Diga o que achou!</label>
+              <md-textarea v-model="new_comment.comment_content"></md-textarea>
+            </md-field>
+          </md-card-content>
+          <md-card-actions>
+            <md-button type="submit" class="md-raised">Comentar</md-button>
+          </md-card-actions>
+        </md-card>
         </form>
     </div>
 </template>
