@@ -201,13 +201,14 @@ export default {
 }
 
 .no-decoration {
-  text-decoration: none;
-  color: white;
+  text-decoration: none !important; 
+  color: white !important;
 }
 .header-icon {
   padding-right: 20px;
   color: white;
   cursor: pointer;
+  box-sizing: initial;
 }
 .header-icon:hover {
   color: black;
